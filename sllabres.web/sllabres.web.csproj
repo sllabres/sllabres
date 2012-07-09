@@ -104,8 +104,8 @@
   <ItemGroup>
     <Content Include="Areas\WebGl\Views\Web.config" />
     <Content Include="Areas\WebGl\Views\Home\Index.spark" />
-    <None Include="Areas\WebGl\Views\Shared\Application.spark" />
-    <None Include="Views\Shared\Application.spark" />
+    <Content Include="Areas\WebGl\Views\Shared\Application.spark" />
+    <Content Include="Views\Shared\Application.spark" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\WebGl\Models\" />
