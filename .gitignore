@@ -1,0 +1,5 @@
+*.csproj.user
+*.csproj.Debug.cachefile
+*.suo
+*bin
+*obj
