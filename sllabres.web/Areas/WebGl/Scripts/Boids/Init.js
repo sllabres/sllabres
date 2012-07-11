@@ -1,9 +1,6 @@
-
-var boidA;
-var boidB;
-var follow;
 var drawService;
 var cohesionRule;
+var boidHandler;
 
 function init() {
     var gl = document.getElementById("canvas").getContext("experimental-webgl");
@@ -11,126 +8,59 @@ function init() {
     shaderService.initialise();
     drawService = new DrawService(gl, shaderService, mat4);        
     drawService.initialise();    
-    cohesionRule = new CohesionRule();
-
-    var drawData = new DrawData();    
-
-    drawData.x = 0.0;
-    drawData.y = 0.0;
-    drawData.z = -50.0;    
-    drawData.yaw = 3*Math.PI/2;
-    
-    drawData.vertices = [
-             0.0,  -1.0,  0.0,
-            2.0, 0.0,  0.0,
-             0.0, 1.0,  0.0
-        ];
-
-    drawData.mode = 4;
-    drawData.count = 3;
-    drawData.itemSize = 3;
-
-    var drawable = new Drawable(gl, drawService, drawData);
-
-    boidA = new Boid(drawable, cohesionRule);    
-
-    document.onkeydown = handleKeyDown;
-    document.onkeyup = handleKeyUp;
-
-    var drawData = new DrawData();    
-
-    drawData.x = 0.0;
-    drawData.y = 10.0;    
-    drawData.z = -50.0;
-    
-    drawData.vertices = [
-             0.0,  -1.0,  0.0,
-            2.0, 0.0,  0.0,
-             0.0, 1.0,  0.0
-        ];
-
-    drawData.mode = 4;
-    drawData.count = 3;
-    drawData.itemSize = 3;
-    
-    follow = new Drawable(gl, drawService, drawData);
-
-    follow.drawData.yaw = Math.PI/2;
-
+    cohesionRule = new CohesionRule(0,0);
+    boidFactory = new BoidFactory(gl, drawService, cohesionRule);   
+    boidHandler = new BoidHandler(boidFactory, 500);
     tick();
 }    
 
-function tick() { 
-        cohesionRule.yTarget = follow.drawData.y;      
-        cohesionRule.xTarget = follow.drawData.x; 
-        cohesionRule.zTarget = follow.drawData.z; 
+function tick() {
         drawService.setView();                    
-        requestAnimFrame(tick);                    
-        //boidB.update();      
-        boidA.update();
-        follow.draw();
-        
-        
-        handleKeys();    
-
-        //document.getElementById("currentAngle").innerText = boidA.drawable.drawData.yaw;
-
-
-        //var angle = Math.atan2(boidB.drawable.drawData.y - boidA.drawable.drawData.y, boidB.drawable.drawData.x - boidA.drawable.drawData.x);        
-        
+        requestAnimFrame(tick);                            
+        boidHandler.updateBoids();
 }
 
-var currentlyPressedKeys = {};
+function BoidHandler(boidFactory, count){
+    this.boidFactory = boidFactory;
+    this.boidCollection = new Array();
+    this.count = count;
 
-    function handleKeyDown(event) {
-        currentlyPressedKeys[event.keyCode] = true;
-
-        if (String.fromCharCode(event.keyCode) == "F") {
-            filter += 1;
-            if (filter == 3) {
-                filter = 0;
-            }
-        }
+    for(i = 0; i<this.count; i++) {
+            this.boidCollection.push(this.boidFactory.createBoid());
     }
 
-
-    function handleKeyUp(event) {
-        currentlyPressedKeys[event.keyCode] = false;
+    this.updateBoids = function() {
+        for(i = 0; i<this.count; i++) {
+            this.boidCollection[i].update();
+        }
     }
+}
 
+function BoidFactory(gl,  drawService, cohesionRule) {
+    this.gl = gl;
+    this.drawService = drawService;
+    this.cohesionRule = cohesionRule;
 
-    function handleKeys() { 
-        if (currentlyPressedKeys[37]) {         
-            // Left cursor key         
-            follow.drawData.x-=0.5;                          
-        }
+    this.createBoid = function() {
+        var drawData = new DrawData();    
 
-        if (currentlyPressedKeys[39]) {
-            // Right cursor key       
-            follow.drawData.x+=0.5;     
-        }
-
-        if (currentlyPressedKeys[38]) { 
-            // Up cursor key         
-            follow.drawData.y+=0.5;       
-        }
-
-        if (currentlyPressedKeys[40]) {
-            // Down cursor key         
-            follow.drawData.y-=0.5;
-        }
-
-        if (currentlyPressedKeys[87]) { 
-            // Up cursor key         
-            follow.drawData.z-=0.5;       
-        }
-
-        if (currentlyPressedKeys[83]) {
-            // Down cursor key         
-            follow.drawData.z+=0.5;
-        }
-             
-    }
-
+        drawData.x = Math.floor((Math.random()*100)-10) / 10;
+        drawData.y = Math.floor((Math.random()*100)-10) / 10;
+        drawData.z = -50.0;    
+        drawData.yaw = 3*Math.PI/2;
     
-    
+        drawData.vertices = [
+                 0.0,  -1.0,  0.0,
+                2.0, 0.0,  0.0,
+                 0.0, 1.0,  0.0
+            ];
+
+        drawData.mode = 4;
+        drawData.count = 3;
+        drawData.itemSize = 3;
+
+        var drawable = new Drawable(this.gl, this.drawService, drawData);
+
+        return new Boid(drawable, this.cohesionRule);
+    }
+}    
