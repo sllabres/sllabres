@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> 
+<head>
+	<title>Specs</title>
+	<link rel="shortcut icon" type="image/png" href="${Url.Content("~/Areas/WebGl/Scripts/Jasmine/jasmine_favicon.png")}">
+	<link rel="stylesheet" type="text/css" href="${Url.Content("~/Areas/WebGl/Scripts/Jasmine/jasmine.css")}">
+	<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/Jasmine/jasmine.js")}"></script>
+	<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/Jasmine/jasmine-html.js")}"></script>
+	<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/glMatrix.js")}"></script>
+	<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/webgl-utils.js")}"></script>  
+</head>
+<body onload="init();">
+	<div id="container">		
+		<div id="content">				  
+			<use content="view"/>
+			<script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 100;
+
+      var trivialReporter = new jasmine.TrivialReporter();
+
+      jasmineEnv.addReporter(trivialReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return trivialReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+		</div>	
+	</div>	
+</body>
+</html>

@@ -70,6 +70,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\WebGl\Controllers\TestController.cs" />
     <Compile Include="Areas\WebGl\Controllers\HomeController.cs" />
     <Compile Include="Areas\WebGl\WebGlAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -82,20 +83,6 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Web.config" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.1.min-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.min-vsdoc.js" />
-    <Content Include="Scripts\MicrosoftAjax.js" />
-    <Content Include="Scripts\MicrosoftAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -108,8 +95,39 @@
     <Content Include="Views\Shared\Application.spark" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\WebGl\Scripts\Boids\Boid.js" />
+    <Content Include="Areas\WebGl\Scripts\Boids\Init.js" />
+    <Content Include="Areas\WebGl\Scripts\Boids\Rules.js" />
+    <Content Include="Areas\WebGl\Scripts\Boids\Specs\Boid.js" />
+    <Content Include="Areas\WebGl\Scripts\Boids\Specs\Rules.js" />
+    <Content Include="Areas\WebGl\Scripts\glMatrix.js" />
+    <Content Include="Areas\WebGl\Scripts\webgl-utils.js" />
+    <Content Include="Areas\WebGl\Scripts\WebGl\Drawable.js" />
+    <Content Include="Areas\WebGl\Scripts\WebGl\DrawHandler.js" />
+    <Content Include="Areas\WebGl\Scripts\WebGl\DrawService.js" />
+    <Content Include="Areas\WebGl\Scripts\WebGl\Init.js" />
+    <Content Include="Areas\WebGl\Scripts\WebGl\ShaderService.js" />
+    <Content Include="Areas\WebGl\Scripts\WebGl\Specs\Drawable.js" />
+    <Content Include="Areas\WebGl\Scripts\WebGl\Specs\DrawHandler.js" />
+    <Content Include="Areas\WebGl\Scripts\WebGl\Specs\DrawService.js" />
+    <Content Include="Areas\WebGl\Scripts\WebGl\Specs\ShaderService.js" />
+    <Content Include="Areas\WebGl\Views\Shared\Test.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\WebGl\Scripts\Jasmine\jasmine-html.js" />
+    <Content Include="Areas\WebGl\Scripts\Jasmine\jasmine.css" />
+    <Content Include="Areas\WebGl\Scripts\Jasmine\jasmine.js" />
+    <Content Include="Areas\WebGl\Scripts\Jasmine\jasmine_favicon.png" />
+    <Content Include="Areas\WebGl\Views\Test\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Areas\WebGl\Scripts\Jasmine\MIT.LICENSE" />
+    <Content Include="Areas\WebGl\Views\Test\Follow.spark" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Areas\WebGl\Models\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
