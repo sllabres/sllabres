@@ -14,5 +14,11 @@ namespace Sllabres.Web.Test
         {
             Assert.That(true);
         }
+
+        [Test]
+        public void FailingTest()
+        {
+            Assert.That(false);
+        }
     }
 }
