@@ -3,7 +3,7 @@ task :default => [:git_commit_and_push]
 
 desc "Build Solution"
 msbuild :build do |msb|
-	msb.properties :configuration => :Release
+	msb.properties :configuration => :Debug
 	msb.targets :Clean, :Build
 	msb.solution = "sllabres.sln"
 end
@@ -14,7 +14,6 @@ nunit :test => :build do |nunit|
 	nunit.assemblies "./Sllabres.Web.Test/Sllabres.Web.Test.csproj"
 	nunit.options '/xml=Sllabres.Tests-Results.xml'
 end
-
 
 task :git_commit_and_push => :test do
 	comment = ask('Enter Comment: ')

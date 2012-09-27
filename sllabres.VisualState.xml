@@ -9,11 +9,6 @@
     <Node UniqueName="[0-1004]Sllabres" Expanded="true" />
     <Node UniqueName="[0-1005]Sllabres.Web" Expanded="true" />
     <Node UniqueName="[0-1006]Sllabres.Web.Test" Expanded="true" />
-    <Node UniqueName="[0-1001]Sllabres.Web.Test.HelloWorld" Expanded="true" />
-    <Node UniqueName="[0-1009]H:\sllabres\Sllabres.Web.Test\bin\Debug\Sllabres.Web.Test.dll" Expanded="true" />
-    <Node UniqueName="[0-1010]Sllabres" Expanded="true" />
-    <Node UniqueName="[0-1011]Sllabres.Web" Expanded="true" />
-    <Node UniqueName="[0-1012]Sllabres.Web.Test" Expanded="true" />
-    <Node UniqueName="[0-1007]Sllabres.Web.Test.HelloWorld" Expanded="true" />
+    <Node UniqueName="[0-1001]Sllabres.Web.Test.FirstTest" Expanded="true" />
   </Nodes>
 </VisualState>
