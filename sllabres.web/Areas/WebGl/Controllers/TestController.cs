@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace sllabres.web.Areas.WebGl.Controllers
+namespace Sllabres.Web.Areas.WebGl.Controllers
 {
     public class TestController : Controller
     {
@@ -14,6 +14,11 @@ namespace sllabres.web.Areas.WebGl.Controllers
         }
 
         public ActionResult Follow()
+        {
+            return View();
+        }
+
+        public ActionResult Pong()
         {
             return View();
         }

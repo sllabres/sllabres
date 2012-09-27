@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace sllabres.web.Areas.WebGl
+namespace Sllabres.Web.Areas.WebGl
 {
     public class WebGlAreaRegistration : AreaRegistration
     {

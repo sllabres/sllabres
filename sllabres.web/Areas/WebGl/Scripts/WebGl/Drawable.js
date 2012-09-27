@@ -5,11 +5,11 @@
         this.z = 0.0;    
         this.roll = 0.0;
         this.pitch = 0.0;
-        this.yaw = 0.0;
-        this.vertices;
+        this.yaw = 0.0;        
         this.mode;
-        this.count;        
+        this.count;
         this.itemSize;
+        this.vertices;
         this.vertexPositionBuffer;
 }
 

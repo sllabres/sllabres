@@ -9,7 +9,7 @@
 		fakeGl = {};
     	fakeDrawHandler = {};
         fakeDrawData = {};
-        fakeDrawData.yaw = 0;
+        fakeDrawData.yaw = 0;                
         
         fakeDrawData.vertices = [0.0,  1.0,  0.0,
 						        -1.0, -1.0,  0.0,

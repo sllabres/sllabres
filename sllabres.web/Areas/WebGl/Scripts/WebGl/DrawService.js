@@ -12,7 +12,7 @@ function DrawService(gl, shaderService, mat4) {
     this.shaderService = shaderService;    
     this.glMatrix = mat4;
     this.projectionMatrix = this.glMatrix.create();
-    this.modelViewMatrix = this.glMatrix.create();    
+    this.modelViewMatrix = this.glMatrix.create();       
 
     this.initialise = function() {
         this.glService.clearColor(0.0, 0.0, 0.0, 1.0);

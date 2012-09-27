@@ -12,7 +12,7 @@ function CohesionRule(xTarget, yTarget) {
     this.xTarget = xTarget;
     this.yTarget = yTarget;
 
-    this.yawDirection = function(xLocation, yLocation, yaw) {        
+    this.yawHeading = function(xLocation, yLocation, yaw) {        
         setAverageCoordinates(xLocation, yLocation);
         
         var targetAngle = Math.atan2(this.yTarget - yLocation, this.xTarget - xLocation);

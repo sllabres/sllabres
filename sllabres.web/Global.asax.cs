@@ -7,7 +7,7 @@ using Spark;
 using Spark.Web.Mvc;
 using System.Diagnostics;
 
-namespace sllabres.web
+namespace Sllabres.Web
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -23,7 +23,7 @@ namespace sllabres.web
                 "Default", // Route name
                 "{controller}/{action}/{id}", 
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional }, // Parameter defaults
-                new string[] { "sllabres.web.Controllers" }
+                new string[] { "Sllabres.Web.Controllers" }
             );
         }
 
