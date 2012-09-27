@@ -7,10 +7,10 @@ using NUnit.Framework;
 namespace Sllabres.Web.Test
 {
     [TestFixture]
-    public class HelloWorld
+    public class FirstTest
     {
         [Test]
-        public void TestHelloWorld()
+        public void Test()
         {
             Assert.That(true);
         }
