@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Areas\WebGl\Scripts\Jasmine\MIT.LICENSE" />
+    <Content Include="Areas\WebGl\Scripts\GameOfLife\GameOfLife.js" />
     <Content Include="Areas\WebGl\Views\Shared\Tests.spark" />
     <Content Include="Areas\WebGl\Views\Tests\GameOfLife.spark" />
     <Content Include="Areas\WebGl\Views\Test\Follow.spark" />

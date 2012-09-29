@@ -1,1 +1,2 @@
 ﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/GameOfLife.js")}"></script>
+<div id="qunit"></div>

@@ -8,7 +8,7 @@
  * http://jquery.org/license
  */
 
-(function( window ) {
+(function(window) {
 
 var QUnit,
 	config,
