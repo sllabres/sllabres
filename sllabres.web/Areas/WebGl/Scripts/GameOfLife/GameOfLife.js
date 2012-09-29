@@ -1,4 +1,35 @@
-﻿module("Live Cell Rules");
+﻿function NeighbourFake() {    
+    this.notifyCount = 0;
+    this.notify = function() {        
+        this.notifyCount++;
+    }
+}
+
+function CellFactoryFake() {
+    this.cellCreated = false;
+    this.createCell = function() {
+        this.cellCreated = true;
+    }
+}
+
+function RuleFake() {    
+    this.returnValue = true;
+    this.neighbourCount = 0;
+    this.isAlive = function(neighbours) {
+        this.neighbourCount = neighbours;
+        return this.returnValue;
+    }
+}
+
+function FakeCell() {    
+    this.updateCount = 0;   
+
+    this.update = function(neighbours) {        
+        this.updateCount++;
+    }
+}
+
+module("Live Cell Rules");
 var liveCellRule = new LiveCellRule();
 test("Live cell with fewer than two neighbours dies", function() {    
     equal(liveCellRule.isAlive(1), false);
@@ -26,29 +57,6 @@ test("Dead cell with two neighbours stays dead", function() {
     equal(deadCellRule.isAlive(2), false);
 });
 
-function NeighbourFake() {    
-    this.notifyCount = 0;
-    this.notify = function() {        
-        this.notifyCount++;
-    }
-}
-
-function CellFactoryFake() {
-    this.cellCreated = false;
-    this.createCell = function() {
-        this.cellCreated = true;
-    }
-}
-
-function RuleFake() {    
-    this.returnValue = true;
-    this.neighboursCount = 0;
-    this.isAlive = function(neighbours) {
-        this.neighboursCount = neighbours;
-        return this.returnValue;
-    }
-}
-
 module("Live Cell");
 var cellFactoryFake = new CellFactoryFake();
 var ruleFake = new RuleFake();
@@ -56,7 +64,7 @@ var liveCell = new LiveCell(cellFactoryFake, ruleFake);
 
 
 test("Live cell notifies one neighbour", function() {
-    this.neighboursCount = 0;
+    this.neighbourCount = 0;
     var neighbourFake = new NeighbourFake();
     var neighbours = new Array(neighbourFake);    
     liveCell.update(neighbours);
@@ -78,20 +86,20 @@ test("Live cell creates dead cell when cell rule returns false", function() {
 });
 
 test("When notified twice live cell queries rule with two neighbours", function() {
-    var liveCell = new LiveCell(cellFactoryFake, ruleFake);
-    ruleFake.neighboursCount = 0;
+    liveCell = new LiveCell(cellFactoryFake, ruleFake);
+    ruleFake.neighbourCount = 0;
     liveCell.notify();
     liveCell.notify();
     liveCell.update(new Array());
-    equal(ruleFake.neighboursCount, 2);
+    equal(ruleFake.neighbourCount, 2);
 })
 
 test("When notified once live cell queries rule with one neighbour", function() {
-    var liveCell = new LiveCell(cellFactoryFake, ruleFake);
-    ruleFake.neighboursCount = 0;
+    liveCell = new LiveCell(cellFactoryFake, ruleFake);
+    ruleFake.neighbourCount = 0;
     liveCell.notify();
     liveCell.update(new Array());
-    equal(ruleFake.neighboursCount, 1);
+    equal(ruleFake.neighbourCount, 1);
 });
 
 module("Dead Cell");
@@ -103,16 +111,23 @@ test("Dead cell creates live cell when rule returns true", function() {
     equal(cellFactoryFake.cellCreated, true);
 });
 
+test("Dead cell notify queries rule with one neighbour", function() {    
+    deadCell = new DeadCell(cellFactoryFake, ruleFake);
+    deadCell.notify();
+    deadCell.update(new Array());    
+    equal(ruleFake.neighbourCount, 1);
+});
+
+test("Dead cell notify called twice queries rule with two neighbours", function() {    
+    deadCell = new DeadCell(cellFactoryFake, ruleFake);
+    deadCell.notify();
+    deadCell.notify();
+    deadCell.update(new Array());    
+    equal(ruleFake.neighbourCount, 2);
+});
+
 module("Grid");
 var fakeCell = new FakeCell();
-
-function FakeCell() {    
-    this.updateCount = 0;   
-
-    this.update = function(neighbours) {        
-        this.updateCount++;
-    }
-}
 
 test("Updating grid updates cell", function() {        
     fakeCell.updateCount = 0;
@@ -155,10 +170,16 @@ function Grid(cells) {
 }
 
 function DeadCell(cellFactoryFake, ruleFake) {
+    var neighbourCount = 0;
+
     this.update = function(neighbours) {
-        if(ruleFake.isAlive(neighbours.length)) {
+        if(ruleFake.isAlive(neighbourCount)) {
             cellFactoryFake.createCell();
         }   
+    }
+
+    this.notify = function() {
+        neighbourCount++;
     }
 }
 
