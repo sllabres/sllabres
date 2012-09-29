@@ -4,6 +4,6 @@
 *bin
 *obj
 *Properties
-TestResult.xml
-Sllabres.Tests-Results.xml
-sllabres.VisualState.xml
+*TestResult.xml
+*Sllabres.Tests-Results.xml
+*sllabres.VisualState.xml
