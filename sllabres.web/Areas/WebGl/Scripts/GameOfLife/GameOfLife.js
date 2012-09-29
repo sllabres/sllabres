@@ -56,6 +56,7 @@ var liveCell = new LiveCell(cellFactoryFake, ruleFake);
 
 
 test("Live cell notifies neighbour", function() {
+    this.neighboursCount = 0;
     var neighbourFake = new NeighbourFake();
     var neighbours = new Array(neighbourFake);    
     liveCell.update(neighbours);
@@ -64,18 +65,33 @@ test("Live cell notifies neighbour", function() {
 
 test("Live cell notifies two neighours", function() {
     var neighbourFake = new NeighbourFake();
-    var neighbours = new Array(neighbourFake, neighbourFake);
-    liveCell.notify();
-    liveCell.notify();
+    var neighbours = new Array(neighbourFake, neighbourFake);    
     liveCell.update(neighbours);    
-    equal(ruleFake.neighboursCount, 2);
+    equal(neighbourFake.notifyCount, 2);
 });
 
-test("Live cell creates dead cell when cell rule returns false", function() {
+test("Live cell creates dead cell when cell rule returns false", function() {    
     ruleFake.returnValue = false;
     cellFactoryFake.cellCreated = false;
     liveCell.update(new Array());
     equal(cellFactoryFake.cellCreated, true);
+});
+
+test("When notified twice live cell queries rule with two neighbours", function() {
+    var liveCell = new LiveCell(cellFactoryFake, ruleFake);
+    ruleFake.neighboursCount = 0;
+    liveCell.notify();
+    liveCell.notify();
+    liveCell.update(new Array());
+    equal(ruleFake.neighboursCount, 2);
+})
+
+test("When notified once live cell queries rule with one neighbour", function() {
+    var liveCell = new LiveCell(cellFactoryFake, ruleFake);
+    ruleFake.neighboursCount = 0;
+    liveCell.notify();
+    liveCell.update(new Array());
+    equal(ruleFake.neighboursCount, 1);
 });
 
 module("Dead Cell");
@@ -147,18 +163,18 @@ function DeadCell(cellFactoryFake, ruleFake) {
 }
 
 function LiveCell(cellFactory, rule) {
-    this.neighbourCount = 0;
+    var neighbourCount = 0;
 
     this.update = function(neighbours) {
         notifyNeighbours(neighbours);
 
-        if (!rule.isAlive(this.neighbourCount)) {
+        if (!rule.isAlive(neighbourCount)) {
             cellFactory.createCell();
         }
     }
 
     this.notify = function() {
-        this.neighbourCount++;
+        neighbourCount++;
     }
 
     var notifyNeighbours = function(neighbours) {
