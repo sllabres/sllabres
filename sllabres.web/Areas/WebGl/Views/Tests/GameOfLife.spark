@@ -1,2 +1,1 @@
-﻿<h1>Conway's Game Of Life</h1>
-
+﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/GameOfLife.js")}"></script>

@@ -3,9 +3,10 @@
 <head>
 	<title>Tests</title>
 	<script type="text/javascript" src="${Url.Content("~/Scripts/qunit-1.10.0.js")}"></script> 
+	<link rel="stylesheet" href="${Url.Content("~/Content/qunit-1.10.0.css")}">
 </head>
 <body>
-	<div id="container">		
+	<div id="container">
 		<div id="content">				  
 			<use content="view"/>			
 		</div>	
