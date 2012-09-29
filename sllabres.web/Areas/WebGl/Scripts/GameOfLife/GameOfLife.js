@@ -55,7 +55,7 @@ var ruleFake = new RuleFake();
 var liveCell = new LiveCell(cellFactoryFake, ruleFake);
 
 
-test("Live cell notifies neighbour", function() {
+test("Live cell notifies one neighbour", function() {
     this.neighboursCount = 0;
     var neighbourFake = new NeighbourFake();
     var neighbours = new Array(neighbourFake);    
@@ -136,7 +136,7 @@ test("Updating grid updates one cell with one neighbour", function() {
     var grid = new Grid(fakeCells);
     grid.update();
     equal(fakeCell.updateCount, 1);
-})
+});
 
 test("Updating grid updates cell with two neighbours", function() {    
     fakeCell.updateCount = 0;
@@ -144,7 +144,7 @@ test("Updating grid updates cell with two neighbours", function() {
     var grid = new Grid(fakeCells);
     grid.update();
     equal(fakeCell.updateCount, 2);
-})
+});
 
 function Grid(cells) {
     this.update = function(){  
@@ -178,6 +178,7 @@ function LiveCell(cellFactory, rule) {
     }
 
     var notifyNeighbours = function(neighbours) {
+        var neighbour;
         while(neighbour=neighbours.shift()){
             neighbour.notify();
         }
