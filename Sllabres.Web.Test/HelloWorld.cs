@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
-namespace Sllabres.Web.Test
+namespace sllabres.web.test
 {
     [TestFixture]
     public class FirstTest

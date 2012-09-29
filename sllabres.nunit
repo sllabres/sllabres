@@ -3,6 +3,6 @@
   <Config name="Debug" binpathtype="Auto">
   </Config>
   <Config name="Release" binpathtype="Auto">
-    <assembly path="Sllabres.Web.Test\bin\Release\Sllabres.Web.Test.dll" />
+    <assembly path="sllabres.web.test\bin\Release\sllabres.web.test.dll" />
   </Config>
 </NUnitProject>

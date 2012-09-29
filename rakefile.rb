@@ -11,7 +11,7 @@ end
 desc "Run unit tests"
 nunit :test => :build do |nunit|
 	nunit.command = "../Library/NUnit/bin/nunit-console.exe"
-	nunit.assemblies "./Sllabres.Web.Test/Sllabres.Web.Test.csproj"
+	nunit.assemblies "./sllabres.web.test/sllabres.web.test.csproj"
 	nunit.options '/xml=Sllabres.Tests-Results.xml'
 end
 

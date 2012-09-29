@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sllabres.Web", "sllabres.web\Sllabres.Web.csproj", "{95EEF887-A44B-4B20-B117-CCC81C16D730}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sllabres.Web.Test", "Sllabres.Web.Test\Sllabres.Web.Test.csproj", "{FB433D84-0520-420F-A94B-083B1EA5664D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sllabres.web.test", "sllabres.web.test\sllabres.web.test.csproj", "{FB433D84-0520-420F-A94B-083B1EA5664D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

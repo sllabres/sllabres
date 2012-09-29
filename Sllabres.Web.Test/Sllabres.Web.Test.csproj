@@ -8,8 +8,8 @@
     <ProjectGuid>{FB433D84-0520-420F-A94B-083B1EA5664D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sllabres.Web.Test</RootNamespace>
-    <AssemblyName>Sllabres.Web.Test</AssemblyName>
+    <RootNamespace>sllabres.web.test</RootNamespace>
+    <AssemblyName>sllabres.web.test</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
