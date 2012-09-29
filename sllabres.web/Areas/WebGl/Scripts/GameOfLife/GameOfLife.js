@@ -33,9 +33,9 @@ function NeighbourFake() {
     }
 }
 
-function DeadCellFactoryFake() {
+function CellFactoryFake() {
     this.cellCreated = false;
-    this.createDeadCell = function() {
+    this.createCell = function() {
         this.cellCreated = true;
     }
 }
@@ -48,54 +48,74 @@ function RuleFake() {
 }
 
 module("Live Cell");
-var deadCellFactoryFake = new DeadCellFactoryFake();
+var cellFactoryFake = new CellFactoryFake();
 var ruleFake = new RuleFake();
-var liveCell = new LiveCell(deadCellFactoryFake, ruleFake);
+var liveCell = new LiveCell(cellFactoryFake, ruleFake);
 
 test("Live cell notifies neighbour", function() {
     var neighbourFake = new NeighbourFake();
-    neighbours = new Array(neighbourFake);    
+    var neighbours = new Array(neighbourFake);    
     liveCell.update(neighbours);
     equal(neighbourFake.notifyCount, 1);
 });
 
 test("Live cell notifies two neighours", function() {
     var neighbourFake = new NeighbourFake();
-    neighbours = new Array(neighbourFake, neighbourFake);
+    var neighbours = new Array(neighbourFake, neighbourFake);
     liveCell.update(neighbours);
     equal(neighbourFake.notifyCount, 2);
 });
 
 test("Live cell creates dead cell when cell rule returns false", function() {
     ruleFake.returnValue = false;
-    deadCellFactoryFake.cellCreated = false;
+    cellFactoryFake.cellCreated = false;
     liveCell.update(new Array());
-    equal(deadCellFactoryFake.cellCreated, true);
+    equal(cellFactoryFake.cellCreated, true);
 });
 
 test("Live cell does not create dead when cell rule returns true", function() {
     ruleFake.returnValue = true;
-    deadCellFactoryFake.cellCreated = false;
+    cellFactoryFake.cellCreated = false;
     liveCell.update(new Array());
-    equal(deadCellFactoryFake.cellCreated, false);
+    equal(cellFactoryFake.cellCreated, false);
 });
 
 module("Dead Cell");
-test("Dead cell creates live cell when it has 3 neighbours", function() {
-    equal(liveCellFactoryFake.cellCreated, true);
+var deadCell = new DeadCell(cellFactoryFake, ruleFake);
+test("Dead cell creates live cell when rule returns true", function() {   
+    ruleFake.returnValue = true;     
+    cellFactoryFake.cellCreated = false;
+    deadCell.update(new Array());
+    equal(cellFactoryFake.cellCreated, true);
 });
+
+test("Dead cell does not create live cell when rule returns false", function() {
+    ruleFake.returnValue = false;
+    cellFactoryFake.cellCreated = false;
+    deadCell.update(new Array());
+    equal(cellFactoryFake.cellCreated, false);
+});
+
+
+function DeadCell(cellFactoryFake, ruleFake) {
+    this.update = function() {
+        if(ruleFake.isAlive()) {
+            cellFactoryFake.createCell();
+        }   
+    }
+}
 
 function LiveCell(deadCellFactory, rule) {
     this.update = function(neighbours) {
         notifyNeighbours(neighbours);
 
         if (!rule.isAlive()) {
-            deadCellFactory.createDeadCell();
+            deadCellFactory.createCell();
         }
     }
 
     var notifyNeighbours = function(neighbours) {
-        for (i = 0; i < neighbours.length; i++) {
+        for (var i = 0; i < neighbours.length; i++) {
             neighbours[i].notify();
         }
     }
