@@ -70,6 +70,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\WebGl\Controllers\TestsController.cs" />
     <Compile Include="Areas\WebGl\Controllers\TestController.cs" />
     <Compile Include="Areas\WebGl\Controllers\HomeController.cs" />
     <Compile Include="Areas\WebGl\WebGlAreaRegistration.cs" />
@@ -122,7 +123,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Areas\WebGl\Scripts\Jasmine\MIT.LICENSE" />
-    <Content Include="Areas\WebGl\Views\Test\GameOfLife.spark" />
+    <Content Include="Areas\WebGl\Views\Shared\Tests.spark" />
+    <Content Include="Areas\WebGl\Views\Tests\GameOfLife.spark" />
     <Content Include="Areas\WebGl\Views\Test\Follow.spark" />
     <Content Include="Content\qunit-1.10.0.css" />
     <Content Include="Scripts\qunit-1.10.0.js" />

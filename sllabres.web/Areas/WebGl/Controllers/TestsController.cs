@@ -6,14 +6,14 @@ using System.Web.Mvc;
 
 namespace sllabres.web.Areas.WebGl.Controllers
 {
-    public class TestController : Controller
+    public class TestsController : Controller
     {
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Follow()
+        public ActionResult GameOfLife()
         {
             return View();
         }
