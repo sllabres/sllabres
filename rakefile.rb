@@ -15,14 +15,8 @@ nunit :test => :build do |nunit|
 	nunit.options '/xml=Sllabres.Tests-Results.xml'
 end
 
-task :git_commit_and_push => :test do
-	comment = ask('Enter Comment: ')
+task :git_commit_and_push => :test do	
 	`git add .`
-	`git commit -m "#{comment}"`
+	`git commit -m "Automated Commit"`
 	`git push origin master`
-end
-
-def ask message
-	print message
-	STDIN.gets.chomp
 end
