@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Sllabres.Web.Areas.WebGl.Controllers
+namespace sllabres.web.Areas.WebGl.Controllers
 {
     public class HomeController : Controller
     {
