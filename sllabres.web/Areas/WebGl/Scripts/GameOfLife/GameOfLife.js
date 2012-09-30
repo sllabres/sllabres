@@ -440,12 +440,12 @@ function DeadCellRule() {
     }
 }
 
-function CellFactory(liveCellRule, deadCellRule) {
+function CellFactory(liveCellRule, deadCellRule, drawService) {
     this.createLiveCell = function() {
-        return new LiveCell(this, liveCellRule);
+        return new LiveCell(this, liveCellRule, drawService);
     }
 
     this.createDeadCell = function() {
-        return new DeadCell(this, deadCellRule);
+        return new DeadCell(this, deadCellRule, drawService);
     }
 }

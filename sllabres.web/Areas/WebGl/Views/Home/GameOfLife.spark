@@ -1,5 +1,4 @@
 ﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/GameOfLife.js")}"></script>
-<div id="qunit"></div>
 
 <script type="application/javascript">
 
@@ -32,5 +31,5 @@ function runGame() {
 
 //draw();
   </script>
-
-  <canvas id="canvas" width="300" height="300"></canvas>
+  
+<h1>Game Of Life</h1>

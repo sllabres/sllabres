@@ -12,5 +12,10 @@ namespace sllabres.web.Areas.WebGl.Controllers
         {
             return View();
         }
+
+        public ActionResult GameOfLife() 
+        {
+        	return View();
+        }
     }
 }
