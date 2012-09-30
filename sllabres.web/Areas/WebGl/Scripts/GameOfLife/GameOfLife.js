@@ -155,12 +155,12 @@ test("Drawing cell draw calls drawService draw with index", function() {
 
 test("Drawing cell draw calls drawService draw with status", function() {
     var aliveCell = true;
-    liveCell.draw(aliveCell, 0);
+    liveCell.draw(0);
     equal(drawServiceFake.isAliveCell, aliveCell);
 });
 
 module("Dead Cell");
-var deadCell = new DeadCell(cellFactoryFake, ruleFake);
+var deadCell = new DeadCell(cellFactoryFake, ruleFake, drawServiceFake);
 test("Dead cell notify queries rule with one neighbour", function() {    
     deadCell = new DeadCell(cellFactoryFake, ruleFake);
     deadCell.notify();
@@ -169,7 +169,7 @@ test("Dead cell notify queries rule with one neighbour", function() {
 });
 
 test("Dead cell notify called twice queries rule with two neighbours", function() {    
-    deadCell = new DeadCell(cellFactoryFake, ruleFake);
+    deadCell = new DeadCell(cellFactoryFake, ruleFake, drawServiceFake);
     deadCell.notify();
     deadCell.notify();
     deadCell.checkRule();
@@ -190,6 +190,25 @@ test("Dead cell returns live cell when it has three neighbours", function() {
     ruleFake.returnValue = true;
     var returnedCell = deadCell.checkRule();
     strictEqual(returnedCell, localLiveCell);
+});
+
+test("Drawing dead cell draw calls drawService draw", function() {    
+    deadCell.draw();
+    equal(drawServiceFake.drawCalled, true);
+});
+
+
+test("Drawing cell draw calls drawService draw with index", function() {    
+    var cellIndex = 2;
+    deadCell.draw(cellIndex);
+    equal(drawServiceFake.cellIndex, cellIndex);
+});
+
+test("Drawing cell draw calls drawService draw with status", function() {
+    drawServiceFake.isAliveCell = false;
+    var aliveCell = false;
+    deadCell.draw(0);
+    equal(drawServiceFake.isAliveCell, aliveCell);
 });
 
 module("Grid");
@@ -357,7 +376,7 @@ function Grid(cells, gridWidth) {
     }
 }
 
-function DeadCell(cellFactory, ruleFake) {
+function DeadCell(cellFactory, ruleFake, drawService) {
     var neighbourCount = 0;
 
     this.checkRule = function() {        
@@ -375,8 +394,11 @@ function DeadCell(cellFactory, ruleFake) {
 
     // don't notify neighbours, I'm dead
     // dead code??
-    this.notifyNeighbours = function(neighbours) { }        
-    
+    this.notifyNeighbours = function(neighbours) { }    
+
+    this.draw = function(index) {
+        drawService.draw(false, index);
+    }      
 }
 
 function LiveCell(cellFactory, rule, drawService) {
