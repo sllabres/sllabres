@@ -15,9 +15,23 @@ function CellFactoryFake() {
 function RuleFake() {    
     this.returnValue = true;
     this.neighbourCount = 0;
-    this.isAlive = function(neighbours) {
-        this.neighbourCount = neighbours;
+    this.isAlive = function(neighboursCount) {
+        this.neighbourCount = neighboursCount;
         return this.returnValue;
+    }
+}
+
+function FakeCell() {    
+    this.updateCount = 0;   
+    this.neighbourCount = 0;
+    this.ruleCheck = true;
+
+    this.notifyNeighbours = function(neighbours) {        
+        this.updateCount++;
+
+        if(neighbours != null) {
+            this.neighbourCount = neighbours.length;
+        }
     }
 }
 
@@ -202,19 +216,6 @@ test("CellB has 8 neighbours", function() {
     equal(fakeCellB.neighbourCount, 8);
 });
 
-function FakeCell() {    
-    this.updateCount = 0;   
-    this.neighbourCount = 0;
-
-    this.notifyNeighbours = function(neighbours) {        
-        this.updateCount++;
-
-        if(neighbours != null) {
-            this.neighbourCount = neighbours.length;
-        }
-    }
-}
-
 function Grid(cells, gridWidth) {
     var gridSize = (gridWidth * gridWidth);
     this.update = function(){ 
@@ -254,6 +255,7 @@ function DeadCell(cellFactoryFake, ruleFake) {
 
     this.notifyNeighbours = function(neighbours) {
         // don't notify neighbours, I'm dead
+        // dead code??
     }   
 }
 
