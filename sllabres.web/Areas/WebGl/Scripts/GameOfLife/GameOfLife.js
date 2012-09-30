@@ -124,8 +124,16 @@ test("cell returns dead cell when it has one neighbours", function() {
     var localDeadCell = new FakeCell();
     cellFactoryFake.deadCellToReturn = localDeadCell;
     ruleFake.returnValue = false;
-    var returnedCell = deadCell.checkRule();
+    var returnedCell = liveCell.checkRule();
     strictEqual(returnedCell, localDeadCell);
+});
+
+test("Cell returns live cell when it has two neighbours", function() {
+    var localLiveCell = new FakeCell();
+    cellFactoryFake.liveCellToReturn = localLiveCell;
+    ruleFake.returnValue = true;
+    var returnedCell = liveCell.checkRule();
+    strictEqual(returnedCell, localLiveCell);
 });
 
 module("Dead Cell");
@@ -203,6 +211,8 @@ test("Updating grid updates cell with two neighbours", function() {
     equal(fakeCell.updateCount, 2);
 });
 
+// Missing class? Neighbour finder?
+// Grid is perhaps doing too much
 test("Cell has update called with no neighbours", function() {
     fakeCell.updateCount = 0;
     fakeCell.neighbourCount = 0;
@@ -257,7 +267,7 @@ function Grid(cells, gridWidth) {
     this.update = function(){ 
         cells.forEach(function(cell, index) {
             cell.notifyNeighbours(getNeighbours(cells, index));
-        });
+       });
     }
 
     var getNeighbours = function(cells, cellIndex) {
@@ -311,9 +321,12 @@ function LiveCell(cellFactory, rule) {
     var neighbourCount = 0;
 
     this.checkRule = function() {
-        if (!rule.isAlive(neighbourCount)) {
-            cellFactory.createCell();
+        if (rule.isAlive(neighbourCount)) {
+            return cellFactory.createLiveCell();
         }
+        else {
+            return cellFactory.createDeadCell();
+        }        
     }
 
     this.notify = function() {
