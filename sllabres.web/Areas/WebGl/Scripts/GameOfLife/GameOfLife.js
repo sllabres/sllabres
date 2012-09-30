@@ -6,9 +6,21 @@
 }
 
 function CellFactoryFake() {
+    this.deadCellToReturn;
+    this.liveCellToReturn;
     this.cellCreated = false;
     this.createCell = function() {
         this.cellCreated = true;
+    }
+
+    this.createDeadCell = function() {
+        this.cellCreated = true;
+        return this.deadCellToReturn;
+    }
+
+    this.createLiveCell = function() {
+        this.cellCreated = true;
+        return this.liveCellToReturn;
     }
 }
 
@@ -108,6 +120,14 @@ test("When notified once live cell queries rule with one neighbour", function() 
     equal(ruleFake.neighbourCount, 1);
 });
 
+test("cell returns dead cell when it has one neighbours", function() {   
+    var localDeadCell = new FakeCell();
+    cellFactoryFake.deadCellToReturn = localDeadCell;
+    ruleFake.returnValue = false;
+    var returnedCell = deadCell.checkRule();
+    strictEqual(returnedCell, localDeadCell);
+});
+
 module("Dead Cell");
 var deadCell = new DeadCell(cellFactoryFake, ruleFake);
 test("Dead cell creates live cell when rule returns true", function() {   
@@ -128,8 +148,24 @@ test("Dead cell notify called twice queries rule with two neighbours", function(
     deadCell = new DeadCell(cellFactoryFake, ruleFake);
     deadCell.notify();
     deadCell.notify();
-    deadCell.checkRule();    
+    deadCell.checkRule();
     equal(ruleFake.neighbourCount, 2);
+});
+
+test("Dead cell returns dead cell when it has two neighbours", function() {   
+    var localDeadCell = new FakeCell();
+    cellFactoryFake.deadCellToReturn = localDeadCell;
+    ruleFake.returnValue = false;
+    var returnedCell = deadCell.checkRule();
+    strictEqual(returnedCell, localDeadCell);
+});
+
+test("Dead cell returns live cell when it has three neighbours", function() {
+    var localLiveCell = new FakeCell();
+    cellFactoryFake.liveCellToReturn = localLiveCell;
+    ruleFake.returnValue = true;
+    var returnedCell = deadCell.checkRule();
+    strictEqual(returnedCell, localLiveCell);
 });
 
 module("Grid");
@@ -224,29 +260,41 @@ function Grid(cells, gridWidth) {
         });
     }
 
-    var getNeighbours = function(cells, rowIndex) {
+    var getNeighbours = function(cells, cellIndex) {
         var neighbours = new Array();
 
-        var startIndex = (rowIndex % gridWidth) >= 1 ? gridWidth + 1 : gridWidth;
-        startIndex = (rowIndex - startIndex);
+        var startIndex = getStartIndex(cellIndex);
 
         for(var i = startIndex; i < gridSize; i++) {
-            if(cells[i] != null && i != rowIndex) {
+            if(isNeighbour(cells, i, cellIndex)) {
                 neighbours.push(cells[i]);
             }
         }
 
         return neighbours;
     }
+
+    var isNeighbour = function(cells, currentIndex, cellIndex) {
+        return cells[currentIndex] != null && currentIndex != cellIndex;
+    }
+
+    var getStartIndex = function(cellIndex) {
+        var startIndex = (cellIndex % gridWidth) >= 1 ? gridWidth + 1 : gridWidth;
+        startIndex = (cellIndex - startIndex);
+        return startIndex;
+    }
 }
 
-function DeadCell(cellFactoryFake, ruleFake) {
+function DeadCell(cellFactory, ruleFake) {
     var neighbourCount = 0;
 
-    this.checkRule = function() {
-        if(ruleFake.isAlive(neighbourCount)) {
-            cellFactoryFake.createCell();
+    this.checkRule = function() {        
+        if(ruleFake.isAlive(neighbourCount)) {            
+            return cellFactory.createLiveCell();
         }   
+        else {
+            return cellFactory.createDeadCell();
+        }
     }
 
     this.notify = function() {
@@ -276,7 +324,7 @@ function LiveCell(cellFactory, rule) {
         neighbours.forEach(function(neighbour){
             neighbour.notify();
         });
-    }    
+    }
 }
 
 function LiveCellRule() {
