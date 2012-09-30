@@ -21,14 +21,6 @@ function RuleFake() {
     }
 }
 
-function FakeCell() {    
-    this.updateCount = 0;   
-
-    this.update = function(neighbours) {        
-        this.updateCount++;
-    }
-}
-
 module("Live Cell Rules");
 var liveCellRule = new LiveCellRule();
 test("Live cell with fewer than two neighbours dies", function() {    
@@ -161,11 +153,33 @@ test("Updating grid updates cell with two neighbours", function() {
     equal(fakeCell.updateCount, 2);
 });
 
+test("Cell has update called with no neighbours", function() {
+    fakeCell.updateCount = 0;
+    fakeCell.neighbourCount = 0;
+    var fakeCells = new Array(fakeCell);
+    var grid = new Grid(fakeCells);
+    grid.update();
+    equal(fakeCell.neighbourCount, 0);
+});
+
+function FakeCell() {    
+    this.updateCount = 0;   
+    this.neighbourCount = 0;
+
+    this.update = function(neighbours) {        
+        this.updateCount++;
+
+        if(neighbours != null) {
+            this.neighbourCount = neighbours.length;
+        }
+    }
+}
+
 function Grid(cells) {
-    this.update = function(){  
-            for (var i = 0; i < cells.length; i++) {
-                cells[i].update(cells);
-            }
+    this.update = function(){ 
+            cells.forEach(function(cell) {
+                cell.update();
+            });
     }
 }
 
@@ -199,10 +213,9 @@ function LiveCell(cellFactory, rule) {
     }
 
     var notifyNeighbours = function(neighbours) {
-        var neighbour;
-        while(neighbour=neighbours.shift()){
+        neighbours.forEach(function(neighbour){
             neighbour.notify();
-        }
+        });
     }    
 }
 
