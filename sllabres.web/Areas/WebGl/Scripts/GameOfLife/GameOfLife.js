@@ -264,6 +264,7 @@ test("CellB has 8 neighbours", function() {
 
 function Grid(cells, gridWidth) {
     var gridSize = (gridWidth * gridWidth);
+    
     this.update = function(){ 
         cells.forEach(function(cell, index) {
             cell.notifyNeighbours(getNeighbours(cells, index));
