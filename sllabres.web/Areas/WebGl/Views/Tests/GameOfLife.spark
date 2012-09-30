@@ -1,4 +1,5 @@
-﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/GameOfLife.js")}"></script>
+﻿<script type="text/javascript" src="${Url.Content("~/Scripts/qunit-1.10.0.js")}"></script>
+<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/GameOfLife.js")}"></script>
 <div id="qunit"></div>
 
 <script type="application/javascript">

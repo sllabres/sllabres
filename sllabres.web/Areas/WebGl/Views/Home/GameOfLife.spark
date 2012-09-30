@@ -4,7 +4,7 @@
 
 function DrawService() {
 	this.draw = function(isAlive, index) {
-
+		console.log("drawing");
 	}
 }
 
@@ -27,9 +27,10 @@ function runGame() {
 	}
 
 	var grid = new Grid(cells, 10);
+	grid.update();
 }
 
 //draw();
   </script>
-  
+
 <h1>Game Of Life</h1>
