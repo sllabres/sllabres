@@ -1,36 +1,56 @@
-﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/GameOfLife.js")}"></script>
+﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Code.js")}"></script>
+
+<h1>Game Of Life</h1>
 
 <script type="application/javascript">
 
 function DrawService() {
 	this.draw = function(isAlive, index) {
-		console.log("drawing");
+		document.getElementById(index).innerText = isAlive ? "X" : "O";
 	}
 }
 
+var cells = new Array();
 
-function runGame() {
+function startGame() {
 	var cellFactory = new CellFactory(new LiveCellRule(), new DeadCellRule(), new DrawService()); 
 
-	var cells = new Array();
+	cells = new Array(cellFactory.createDeadCell(), cellFactory.createLiveCell(), cellFactory.createDeadCell(),
+						  cellFactory.createLiveCell(), cellFactory.createLiveCell(), cellFactory.createDeadCell(),
+						  cellFactory.createDeadCell(), cellFactory.createDeadCell(), cellFactory.createDeadCell());
 
-	for(var i = 0; i<100; i++) {
-		var liveCell = Math.Random();
+	for(var i = 0; i<9; i++) {				
+		var liveCell = Math.floor((Math.random()*100)+1);	
 
-		if(liveCell == 1) {
-			cells.push(cellFactory.createLiveCell());
+		if(liveCell > 50) {			
+			//cells.push(cellFactory.createLiveCell());
 		}	
-		else {
-			cells.push(cellFactory.createDeadCell());
-		}		 
+		else {			
+			//cells.push(cellFactory.createDeadCell());
+		}
 
+		if(i % 3 == 0)
+			document.write("<br />");
+
+		document.write("<span id='" + i + "'' style='height: 10px; width: 10px; padding: 5px;float: left;'></span>");
 	}
 
-	var grid = new Grid(cells, 10);
-	grid.update();
+	cells.forEach(function(cell, index) {
+		cell.draw(index);
+	});	
 }
 
-//draw();
-  </script>
+function gridUpdate() {
+	var grid = new Grid(cells, 3);
+	cells = grid.update();
 
-<h1>Game Of Life</h1>
+	cells.forEach(function(cell, index) {
+		cell.draw(index);
+	});	
+
+}
+
+startGame();
+
+setInterval(function(){gridUpdate()},2000);
+  </script>

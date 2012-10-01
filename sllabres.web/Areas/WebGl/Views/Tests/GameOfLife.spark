@@ -1,37 +1,3 @@
-﻿<script type="text/javascript" src="${Url.Content("~/Scripts/qunit-1.10.0.js")}"></script>
-<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/GameOfLife.js")}"></script>
+﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Code.js")}"></script>
+<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Tests.js")}"></script>
 <div id="qunit"></div>
-
-<script type="application/javascript">
-
-function DrawService() {
-	this.draw = function(isAlive, index) {
-
-	}
-}
-
-
-function runGame() {
-	var cellFactory = new CellFactory(new LiveCellRule(), new DeadCellRule(), new DrawService()); 
-
-	var cells = new Array();
-
-	for(var i = 0; i<100; i++) {
-		var liveCell = Math.Random();
-
-		if(liveCell == 1) {
-			cells.push(cellFactory.createLiveCell());
-		}	
-		else {
-			cells.push(cellFactory.createDeadCell());
-		}		 
-
-	}
-
-	var grid = new Grid(cells, 10);
-}
-
-//draw();
-  </script>
-
-  <canvas id="canvas" width="300" height="300"></canvas>
