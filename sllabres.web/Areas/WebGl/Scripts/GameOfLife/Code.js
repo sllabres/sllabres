@@ -1,4 +1,4 @@
-function Grid(cells, gridWidth) {
+function Grid(cells, neighbourhoodWatch) {
     this.update = function(){         
         notifyNeighbours(cells);
         return getReturnSeed(cells);
@@ -15,34 +15,8 @@ function Grid(cells, gridWidth) {
 
     var notifyNeighbours = function(cells) {
         cells.forEach(function(cell, index) {
-            cell.notifyNeighbours(getNeighbours(cells, index));
+            cell.notifyNeighbours(neighbourhoodWatch.getNeighbours(cells, index));
        });
-    }
-
-    // this code is fucking shit
-    var getNeighbours = function(cells, cellIndex) {
-        var gridSize = (gridWidth * gridWidth);
-        var neighbours = new Array();
-
-        var startIndex = getStartIndex(cellIndex);
-
-        for(var i = startIndex; i < (startIndex + 9); i++) {
-            if(isNeighbour(cells, i, cellIndex)) {
-                neighbours.push(cells[i]);
-            }
-        }
-
-        return neighbours;
-    }
-
-    var isNeighbour = function(cells, currentIndex, cellIndex) {
-        return cells[currentIndex] != null && currentIndex != cellIndex;
-    }
-
-    var getStartIndex = function(cellIndex) {
-        var startIndex = (cellIndex % gridWidth) >= 1 ? gridWidth + 1 : gridWidth;
-        startIndex = (cellIndex - startIndex);
-        return startIndex;
     }
 }
 
@@ -51,7 +25,6 @@ function DeadCell(cellFactory, rule, drawService) {
 
     this.checkRule = function() {        
         if(rule.isAlive(neighbourCount)) {
-            console.log("dead cell live cell created: " + neighbourCount);
             return cellFactory.createLiveCell();
         }   
         else {
@@ -118,5 +91,34 @@ function CellFactory(liveCellRule, deadCellRule, drawService) {
 
     this.createDeadCell = function() {
         return new DeadCell(this, deadCellRule, drawService);
+    }
+}
+
+function NeighbourhoodWatch(gridWidth) {
+    this.getNeighbours = function(cells, cellIndex) {
+        var neighbours = new Array();        
+
+        for(var currentIndex = 0; currentIndex < cells.length; currentIndex++) {
+                if(cellWithinBounds(cellIndex, currentIndex)) {
+                    neighbours.push(cells[currentIndex]);
+                }
+        }
+
+        return neighbours;
+    }
+
+    var cellWithinBounds = function(cellIndex, currentIndex) {
+        var cellX = Number(cellIndex % gridWidth);
+        var cellY = Number(Math.floor(cellIndex / gridWidth));
+        var currX = Number(currentIndex % gridWidth);
+        var currY = Number(Math.floor(currentIndex / gridWidth));
+
+        var x = cellX - currX;
+        var y = cellY - currY;
+
+        var z = (x * x) + (y * y)
+        z = Math.sqrt(z);
+        
+        return z < 2 && z > 0;
     }
 }

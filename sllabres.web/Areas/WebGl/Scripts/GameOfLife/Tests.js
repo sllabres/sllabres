@@ -55,6 +55,12 @@ function DrawServiceFake() {
         this.cellIndex = index;
         this.isAliveCell = isAliveCell;
         this.drawCalled = true;
+    }    
+}
+
+function FakeNeighbourhoodWatch() {
+    this.getNeighbours = function() {
+        return new Array();
     }
 }
 
@@ -217,7 +223,7 @@ var fakeCell = new FakeCell();
 test("Updating grid updates cell", function() {        
     fakeCell.updateCount = 0;
     var fakeCells = new Array(fakeCell);
-    var grid = new Grid(fakeCells);
+    var grid = new Grid(fakeCells, new FakeNeighbourhoodWatch());
     grid.update();
     equal(fakeCell.updateCount, 1)
 });
@@ -225,7 +231,7 @@ test("Updating grid updates cell", function() {
 test("Updating grid updates multiple cells", function() {    
     fakeCell.updateCount = 0;    
     var fakeCells = new Array(fakeCell, fakeCell);
-    var grid = new Grid(fakeCells);
+    var grid = new Grid(fakeCells, new FakeNeighbourhoodWatch());
     grid.update();
     equal(fakeCell.updateCount, 2);
 });
@@ -233,7 +239,7 @@ test("Updating grid updates multiple cells", function() {
 test("Updating grid updates one cell with one neighbour", function() {
     fakeCell.updateCount = 0;
     var fakeCells = new Array(fakeCell);
-    var grid = new Grid(fakeCells);
+    var grid = new Grid(fakeCells, new FakeNeighbourhoodWatch());
     grid.update();
     equal(fakeCell.updateCount, 1);
 });
@@ -241,67 +247,16 @@ test("Updating grid updates one cell with one neighbour", function() {
 test("Updating grid updates cell with two neighbours", function() {    
     fakeCell.updateCount = 0;
     var fakeCells = new Array(fakeCell, fakeCell);
-    var grid = new Grid(fakeCells);
+    var grid = new Grid(fakeCells, new FakeNeighbourhoodWatch());
     grid.update();
     equal(fakeCell.updateCount, 2);
-});
-
-// Missing class? Neighbour finder?
-// Grid is perhaps doing too much
-test("Cell has update called with no neighbours", function() {
-    fakeCell.updateCount = 0;
-    fakeCell.neighbourCount = 0;
-    var fakeCells = new Array(fakeCell);
-    var grid = new Grid(fakeCells);
-    grid.update();
-    equal(fakeCell.neighbourCount, 0);
-});
-
-// x x
-// x x
-
-test("CellA has update called with one neighbour", function() {   
-    var fakeCellA = new FakeCell(), fakeCellB = new FakeCell();
-    var fakeCells = new Array(fakeCellA, fakeCellB);
-    var gridWidth = 2;
-    var grid = new Grid(fakeCells, gridWidth);
-    grid.update();
-    equal(fakeCellA.neighbourCount, 1);    
-});
-
-// x x x
-test("CellB has updated called with two neighbours", function() {
-    var fakeCellA = new FakeCell(), fakeCellB = new FakeCell();
-    var fakeCells = new Array(fakeCellA, fakeCellB, fakeCellA);
-    var gridWidth = 3;
-    var grid = new Grid(fakeCells, gridWidth);
-    grid.update();
-    equal(fakeCellB.neighbourCount, 2); 
-});
-
-// x x x
-// x x x
-// x x x
-test("CellB has 8 neighbours", function() {
-    var fakeCellA = new FakeCell(), fakeCellB = new FakeCell();
-
-    var fakeCells = new Array(fakeCellA, fakeCellA, fakeCellA, 
-                              fakeCellA, fakeCellB, fakeCellA, 
-                              fakeCellA, fakeCellA, fakeCellA);
-
-    var gridWidth = 3;
-    
-    var grid = new Grid(fakeCells, gridWidth);
-
-    grid.update();
-    equal(fakeCellB.neighbourCount, 8);
 });
 
 test("Checks rule for cell", function() {
     var fakeCell = new FakeCell();
     var fakeCells = new Array(fakeCell);
     var gridWidth = 1;    
-    var grid = new Grid(fakeCells, gridWidth);
+    var grid = new Grid(fakeCells, new FakeNeighbourhoodWatch());
     grid.update();
     equal(fakeCell.ruleCheck, true);
 });
@@ -311,7 +266,7 @@ test("Grid update returns new cell seed", function() {
     var testCell = new FakeCell();
     fakeCell.returnCell = testCell;
     var gridWidth = 1;
-    var grid = new Grid(new Array(fakeCell), gridWidth);
+    var grid = new Grid(new Array(fakeCell), new FakeNeighbourhoodWatch());
 
     var returnSeed = grid.update();
 
@@ -324,7 +279,7 @@ test("Grid update returns two cells in seed", function() {
     fakeCell.returnCell = testCell;
 
     var gridWidth = 1;
-    var grid = new Grid(new Array(fakeCell, fakeCell), gridWidth);
+    var grid = new Grid(new Array(fakeCell, fakeCell), new FakeNeighbourhoodWatch());
 
     equal(grid.update().length, 2);
 });
@@ -333,26 +288,48 @@ module("NeighbourhoodWatch");
 
 // x
 test("cell has no neighbours", function() {
-    var watch = new NeighbourhoodWatch();
+    var gridWidth = 1;
+    var watch = new NeighbourhoodWatch(gridWidth);
     equal(watch.getNeighbours(new Array("cell")).length, 0);    
 });
-
+    
 // x x
 test("cell has one neighbour", function() {
-    var watch = new NeighbourhoodWatch();
-    var cells = new Array("CellA", "CellB");
-    var neighbours = watch.getNeighbours(cells);
-
+    var gridWidth = 2;
+    var watch = new NeighbourhoodWatch(gridWidth);
+    var cells = new Array("cell", "cell");
+    var cellIndex = 0;
+    var neighbours = watch.getNeighbours(cells, cellIndex);
     equal(neighbours.length, 1);
 });
 
-function NeighbourhoodWatch() {
-    this.getNeighbours = function(cells) {
-        if(cells.length == 1){            
-            return new Array();
-        }
-        else {
-            return new Array("stuff");
-        }
-    }
-}
+// x x x
+// x o x
+// x x x 
+test("cell in centre of orthogonal 3x3 grid has eight neighbours", function() {
+    var gridWidth = 3;
+    var watch = new NeighbourhoodWatch(gridWidth);
+    var numberOfNeighbours = 8;
+    var cells = new Array("cell", "cell", "cell",
+                          "cell", "CentreCell", "cell",
+                          "cell", "cell", "cell");    
+    var cellIndex = 4;
+    var neighbours = watch.getNeighbours(cells, cellIndex);
+    equal(neighbours.length, numberOfNeighbours);
+});
+
+// o x x
+// x x x
+// x x x 
+test("cells in top let of 3*3 grid has 3 neighbours", function() {
+    var gridWidth = 3;
+    var watch = new NeighbourhoodWatch(gridWidth);    
+    var numberOfNeighbours = 3;
+    var cells = new Array("0,0", "1,1", "2,2",
+                          "1,3", "1,4", "2,5",
+                          "2,6", "2,7", "2,8");    
+    var cellIndex = 0;
+    var neighbours = watch.getNeighbours(cells, 0);
+    equal(neighbours.length, numberOfNeighbours);
+});
+

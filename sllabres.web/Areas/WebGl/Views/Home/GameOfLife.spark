@@ -15,21 +15,19 @@ var cells = new Array();
 function startGame() {
 	var cellFactory = new CellFactory(new LiveCellRule(), new DeadCellRule(), new DrawService()); 
 
-	cells = new Array(cellFactory.createDeadCell(), cellFactory.createLiveCell(), cellFactory.createDeadCell(),
-						  cellFactory.createLiveCell(), cellFactory.createLiveCell(), cellFactory.createDeadCell(),
-						  cellFactory.createDeadCell(), cellFactory.createDeadCell(), cellFactory.createDeadCell());
+	cells = new Array();
 
-	for(var i = 0; i<9; i++) {				
+	for(var i = 0; i<100; i++) {				
 		var liveCell = Math.floor((Math.random()*100)+1);	
 
 		if(liveCell > 50) {			
-			//cells.push(cellFactory.createLiveCell());
+			cells.push(cellFactory.createLiveCell());
 		}	
 		else {			
-			//cells.push(cellFactory.createDeadCell());
+			cells.push(cellFactory.createDeadCell());
 		}
 
-		if(i % 3 == 0)
+		if(i % 10 == 0)
 			document.write("<br />");
 
 		document.write("<span id='" + i + "'' style='height: 10px; width: 10px; padding: 5px;float: left;'></span>");
@@ -41,7 +39,7 @@ function startGame() {
 }
 
 function gridUpdate() {
-	var grid = new Grid(cells, 3);
+	var grid = new Grid(cells, new NeighbourhoodWatch(10));
 	cells = grid.update();
 
 	cells.forEach(function(cell, index) {
