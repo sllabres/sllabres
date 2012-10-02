@@ -20,7 +20,7 @@ function startGame() {
 	for(var i = 0; i<100; i++) {				
 		var liveCell = Math.floor((Math.random()*100)+1);	
 
-		if(liveCell > 50) {			
+		if(liveCell > 70) {			
 			cells.push(cellFactory.createLiveCell());
 		}	
 		else {			
@@ -50,5 +50,5 @@ function gridUpdate() {
 
 startGame();
 
-setInterval(function(){gridUpdate()},2000);
+setInterval(function(){gridUpdate()},1000);
   </script>
