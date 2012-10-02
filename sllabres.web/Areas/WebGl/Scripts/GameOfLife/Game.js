@@ -1,6 +1,7 @@
+/// Disclaimer: Ashamed to say that in my haste this code was not test driven :(
 var drawable;
 var drawService;
-var gridSize = 1000
+var gridSize = 500
 var gridWidth = Math.sqrt(gridSize);
 
 function init() {
