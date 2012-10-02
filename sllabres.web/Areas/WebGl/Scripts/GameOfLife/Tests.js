@@ -326,5 +326,33 @@ test("Grid update returns two cells in seed", function() {
     var gridWidth = 1;
     var grid = new Grid(new Array(fakeCell, fakeCell), gridWidth);
 
-    equal(grid.update().length, 2)
+    equal(grid.update().length, 2);
 });
+
+module("NeighbourhoodWatch");
+
+// x
+test("cell has no neighbours", function() {
+    var watch = new NeighbourhoodWatch();
+    equal(watch.getNeighbours(new Array("cell")).length, 0);    
+});
+
+// x x
+test("cell has one neighbour", function() {
+    var watch = new NeighbourhoodWatch();
+    var cells = new Array("CellA", "CellB");
+    var neighbours = watch.getNeighbours(cells);
+
+    equal(neighbours.length, 1);
+});
+
+function NeighbourhoodWatch() {
+    this.getNeighbours = function(cells) {
+        if(cells.length == 1){            
+            return new Array();
+        }
+        else {
+            return new Array("stuff");
+        }
+    }
+}
