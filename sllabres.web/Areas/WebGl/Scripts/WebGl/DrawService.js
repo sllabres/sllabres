@@ -22,7 +22,7 @@ function DrawService(gl, shaderService, mat4) {
     this.setView = function() {
         this.glService.viewport(0,0,500,500);
         this.glService.clear(this.glService.COLOR_BUFFER_BIT | this.glService.DEPTH_BUFFER_BIT);
-        this.glMatrix.perspective(45, 500 / 500, 0.1, 100.0, this.projectionMatrix);                
+        this.glMatrix.perspective(45, 500 / 500, 0.1, 150.0, this.projectionMatrix);                
     }
 
     this.draw = function(drawData) {        

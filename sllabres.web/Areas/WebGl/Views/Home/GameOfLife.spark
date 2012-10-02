@@ -1,54 +1,40 @@
-﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Code.js")}"></script>
+﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/glMatrix.js")}"></script><script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/webgl-utils.js")}"></script>  
+<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Code.js")}"></script>
+<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/WebGl/ShaderService.js")}"></script>
+<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/WebGl/Drawable.js")}"></script>	
+<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/WebGl/DrawService.js")}"></script>	
+<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Game.js")}"></script>
 
-<h1>Game Of Life</h1>
+<script id="shader-fs" type="x-shader/x-fragment">
+    precision mediump float;
+
+    void main(void) {
+        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+    }
+</script>
+
+<script id="shader-vs" type="x-shader/x-vertex">
+    attribute vec3 aVertexPosition;
+    attribute vec2 aTextureCoord;
+
+    uniform mat4 uMVMatrix;
+    uniform mat4 uPMatrix;
+
+    varying vec2 vTextureCoord;
+
+
+    void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+        vTextureCoord = aTextureCoord;
+    }
+</script>
+
+<h1>Game Of Life</h1>  
+
+<canvas id="canvas" style="border: 1px solid black;" width="500" height="500"></canvas>
 
 <script type="application/javascript">
 
-function DrawService() {
-	this.draw = function(isAlive, index) {
-		document.getElementById(index).innerText = isAlive ? "X" : "O";
-	}
-}
+init();
 
-var cells = new Array();
-
-function startGame() {
-	var cellFactory = new CellFactory(new LiveCellRule(), new DeadCellRule(), new DrawService()); 
-
-	cells = new Array();
-
-	for(var i = 0; i<100; i++) {				
-		var liveCell = Math.floor((Math.random()*100)+1);	
-
-		if(liveCell > 70) {			
-			cells.push(cellFactory.createLiveCell());
-		}	
-		else {			
-			cells.push(cellFactory.createDeadCell());
-		}
-
-		if(i % 10 == 0)
-			document.write("<br />");
-
-		document.write("<span id='" + i + "'' style='height: 10px; width: 10px; padding: 5px;float: left;'></span>");
-	}
-
-	cells.forEach(function(cell, index) {
-		cell.draw(index);
-	});	
-}
-
-function gridUpdate() {
-	var grid = new Grid(cells, new NeighbourhoodWatch(10));
-	cells = grid.update();
-
-	cells.forEach(function(cell, index) {
-		cell.draw(index);
-	});	
-
-}
-
-startGame();
-
-setInterval(function(){gridUpdate()},1000);
-  </script>
+</script>

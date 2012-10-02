@@ -6,8 +6,10 @@ function Grid(cells, neighbourhoodWatch) {
 
     var getReturnSeed = function(cells) {
         var returnSeed = new Array();
-        cells.forEach(function(cell) {            
-            returnSeed.push(cell.checkRule());
+        
+        cells.forEach(function(cell, index) { 
+            cell.draw(index);           
+            returnSeed.push(cell.checkRule());                        
         });
 
         return returnSeed;
@@ -15,7 +17,7 @@ function Grid(cells, neighbourhoodWatch) {
 
     var notifyNeighbours = function(cells) {
         cells.forEach(function(cell, index) {
-            cell.notifyNeighbours(neighbourhoodWatch.getNeighbours(cells, index));
+            cell.notifyNeighbours(neighbourhoodWatch.getNeighbours(cells, index));            
        });
     }
 }
@@ -99,7 +101,7 @@ function NeighbourhoodWatch(gridWidth) {
         var neighbours = new Array();        
 
         for(var currentIndex = 0; currentIndex < cells.length; currentIndex++) {
-                if(cellWithinBounds(cellIndex, currentIndex)) {
+                if(isCellWithinBounds(cellIndex, currentIndex)) {
                     neighbours.push(cells[currentIndex]);
                 }
         }
@@ -107,11 +109,11 @@ function NeighbourhoodWatch(gridWidth) {
         return neighbours;
     }
 
-    var cellWithinBounds = function(cellIndex, currentIndex) {
-        var cellX = Number(cellIndex % gridWidth);
-        var cellY = Number(Math.floor(cellIndex / gridWidth));
-        var currX = Number(currentIndex % gridWidth);
-        var currY = Number(Math.floor(currentIndex / gridWidth));
+    var isCellWithinBounds = function(cellIndex, currentIndex) {
+        var cellX = cellIndex % gridWidth;
+        var cellY = Math.floor(cellIndex / gridWidth);
+        var currX = currentIndex % gridWidth;
+        var currY = Math.floor(currentIndex / gridWidth);
 
         var x = cellX - currX;
         var y = cellY - currY;

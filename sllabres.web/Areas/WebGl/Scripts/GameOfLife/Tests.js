@@ -32,6 +32,7 @@ function FakeCell() {
     this.neighbourCount = 0;   
     this.ruleCheck = false; 
     this.returnCell;
+    this.drawCalled = false;
 
     this.notifyNeighbours = function(neighbours) {        
         this.updateCount++;
@@ -44,6 +45,10 @@ function FakeCell() {
     this.checkRule = function(neighbours) {
         this.ruleCheck = true;
         return this.returnCell;
+    }
+
+    this.draw = function(index) {     
+        this.drawCalled = true;        
     }
 }
 
@@ -283,6 +288,13 @@ test("Grid update returns two cells in seed", function() {
 
     equal(grid.update().length, 2);
 });
+
+test("Draw is called on fake cell after update", function() {      
+    var fakeCell = new FakeCell();
+    var grid = new Grid(new Array(fakeCell), new FakeNeighbourhoodWatch());
+    grid.update();
+    equal(fakeCell.drawCalled, true);
+})
 
 module("NeighbourhoodWatch");
 
