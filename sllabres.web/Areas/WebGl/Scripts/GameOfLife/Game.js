@@ -1,7 +1,7 @@
 /// Disclaimer: Ashamed to say that in my haste this code was not test driven :(
 var drawable;
 var drawService;
-var gridSize = 400
+var gridSize = 900
 var gridWidth = Math.sqrt(gridSize);
 
 function init() {
@@ -53,8 +53,8 @@ function tick() {
 function DrawWrapper(drawable) {
     this.draw = function(isAlive, index) {
         if(isAlive) {
-            drawable.drawData.x = ((index % gridWidth)) * 2.5;
-            drawable.drawData.y = Math.round((index / gridWidth)) * 2.5;
+            drawable.drawData.x = (((index % gridWidth)) * 2.5) - 50;
+            drawable.drawData.y = (Math.round((index / gridWidth)) * 2.5) - 20;
             drawable.draw();        
         }
     }
