@@ -118,9 +118,6 @@ function NeighbourhoodWatch(gridWidth) {
         var x = cellX - currX;
         var y = cellY - currY;
         
-        var z = (x * x) + (y * y)
-        z = Math.sqrt(z);
-        
-        return z < 2 && z > 0;
+        return (x >= -1 && x <= 1) && (y >= -1 && y <= 1) && (cellIndex == currentIndex);
     }
 }
