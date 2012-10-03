@@ -15,7 +15,7 @@ function init() {
 
     drawData.x = -100.0;
     drawData.y = 0.0;
-    drawData.z = -200.0;
+    drawData.z = -140.0;
 
     drawData.vertices = [
             -1.0, -1.0,  1.0,
@@ -54,7 +54,7 @@ function DrawWrapper(drawable) {
     this.draw = function(isAlive, index) {
         if(isAlive) {
             drawable.drawData.x = (((index % gridWidth)) * 2.5) - 50;
-            drawable.drawData.y = (Math.round((index / gridWidth)) * 2.5) - 20;
+            drawable.drawData.y = (Math.round((index / gridWidth)) * 2.5) - 50;
             drawable.draw();        
         }
     }
