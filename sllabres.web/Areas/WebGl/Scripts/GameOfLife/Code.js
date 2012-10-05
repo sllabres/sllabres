@@ -96,20 +96,39 @@ function CellFactory(liveCellRule, deadCellRule, drawService) {
     }
 }
 
-function NeighbourhoodWatch(gridWidth, boundsChecker) {
+function NeighbourhoodWatch(gridWidth) {
     this.getNeighbours = function(cells, cellIndex) {
-        var neighbours = new Array();        
+        var neighbours = new Array();
 
-        var startIndex = cellIndex - gridWidth - 1;
-        var endIndex = cellIndex + gridWidth + 1;
+        var startIndex = getStartIndex(cellIndex);
+        var endIndex = getEndIndex(cellIndex, cells.length);
 
         for(var currentIndex = startIndex; currentIndex <= endIndex; currentIndex++) {
-                if(currentIndex != cellIndex && cells[currentIndex] != null && isCellWithinBounds(cellIndex, currentIndex)) {
+                if(isCellWithinBounds(cellIndex, currentIndex)) {
                     neighbours.push(cells[currentIndex]);
                 }
         }
 
         return neighbours;
+    }
+
+    var getStartIndex = function(cellIndex) {
+        var startIndex = cellIndex - gridWidth - 1;
+        if(startIndex < 0) {
+            startIndex = 0;
+        }
+
+        return startIndex;
+    }
+
+    var getEndIndex = function(cellIndex, arrayLength) {
+        var endIndex = cellIndex + gridWidth + 1;         
+
+        if(endIndex > arrayLength) {
+            endIndex = arrayLength - 1;
+        }
+
+        return endIndex;
     }
 
     var isCellWithinBounds = function(cellIndex, currentIndex) {

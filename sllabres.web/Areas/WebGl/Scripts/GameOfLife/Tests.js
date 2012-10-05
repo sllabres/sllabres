@@ -306,7 +306,7 @@ test("cell has no neighbours", function() {
 });
     
 // x x
-test("cell has one neighbour", function() {
+test("when two cells in grid cell has one neighbour", function() {
     var gridWidth = 2;
     var watch = new NeighbourhoodWatch(gridWidth);
     var cells = new Array("cell", "cell");
