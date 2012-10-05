@@ -333,7 +333,7 @@ test("cell in centre of orthogonal 3x3 grid has eight neighbours", function() {
 // o x x
 // x x x
 // x x x 
-test("cells in top let of 3*3 grid has 3 neighbours", function() {
+test("cells in top left of 3*3 grid has 3 neighbours", function() {
     var gridWidth = 3;
     var watch = new NeighbourhoodWatch(gridWidth);    
     var numberOfNeighbours = 3;
@@ -344,4 +344,3 @@ test("cells in top let of 3*3 grid has 3 neighbours", function() {
     var neighbours = watch.getNeighbours(cells, 0);
     equal(neighbours.length, numberOfNeighbours);
 });
-

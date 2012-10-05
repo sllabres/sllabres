@@ -96,12 +96,15 @@ function CellFactory(liveCellRule, deadCellRule, drawService) {
     }
 }
 
-function NeighbourhoodWatch(gridWidth) {
+function NeighbourhoodWatch(gridWidth, boundsChecker) {
     this.getNeighbours = function(cells, cellIndex) {
         var neighbours = new Array();        
 
-        for(var currentIndex = 0; currentIndex < cells.length; currentIndex++) {
-                if(isCellWithinBounds(cellIndex, currentIndex)) {
+        var startIndex = cellIndex - gridWidth - 1;
+        var endIndex = cellIndex + gridWidth + 1;
+
+        for(var currentIndex = startIndex; currentIndex <= endIndex; currentIndex++) {
+                if(currentIndex != cellIndex && cells[currentIndex] != null && isCellWithinBounds(cellIndex, currentIndex)) {
                     neighbours.push(cells[currentIndex]);
                 }
         }
@@ -112,7 +115,7 @@ function NeighbourhoodWatch(gridWidth) {
     var isCellWithinBounds = function(cellIndex, currentIndex) {
         var cellX = cellIndex % gridWidth;
         var cellY = Math.floor(cellIndex / gridWidth);
-        var currX = currentIndex % gridWidth;
+        var currX = currentIndex % gridWidth;   
         var currY = Math.floor(currentIndex / gridWidth);
 
         var x = cellX - currX;

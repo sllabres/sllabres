@@ -1,7 +1,7 @@
 /// Disclaimer: Ashamed to say that in my haste this code was not test driven :(
 var drawable;
 var drawService;
-var gridSize = 900;
+var gridSize = 1600;
 var gridWidth = Math.sqrt(gridSize);
 
 function init() {
@@ -15,7 +15,7 @@ function init() {
 
     drawData.x = -100.0;
     drawData.y = 0.0;
-    drawData.z = -140.0;
+    drawData.z = -150.0;
 
     drawData.vertices = [
             -1.0, -1.0,  1.0,
