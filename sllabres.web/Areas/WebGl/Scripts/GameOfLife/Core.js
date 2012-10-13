@@ -63,7 +63,7 @@ function DeadCell(cellFactory, rule, drawService) {
 function LiveCell(cellFactory, rule, drawService) {
     var neighbourCount = 0;
 
-    this.checkRule = function() {
+    function checkRule() {
         if (rule.isAlive(neighbourCount)) {
             return cellFactory.createLiveCell();
         }
@@ -72,19 +72,26 @@ function LiveCell(cellFactory, rule, drawService) {
         }        
     }
 
-    this.notify = function() {        
+    function notify() {        
         neighbourCount++;
     }
 
-    this.notifyNeighbours = function(neighbours) {
+    function notifyNeighbours(neighbours) {
         neighbours.forEach(function(neighbour){
             neighbour.notify();
         });
     }
 
-    this.draw = function(index) {        
+    function draw(index) {        
         drawService.draw(true, index);
     }
+
+    return {
+        checkRule : checkRule,
+        notify : notify,
+        notifyNeighbours : notifyNeighbours,
+        draw : draw
+    };
 }
 
 function LiveCellRule() {
