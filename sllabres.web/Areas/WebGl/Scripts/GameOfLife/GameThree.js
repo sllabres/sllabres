@@ -24,12 +24,11 @@ function Game() {
 
     document.body.appendChild( renderer.domElement );    
 
-    function animate() {        
-        requestAnimationFrame(animate);                
+    function animate() {                
         grid.draw();
         grid.update();
-        renderer.render( scene, camera );
-        //scene = new THREE.Scene();
+        renderer.render( scene, camera );                
+        requestAnimationFrame(animate);
     }    
 
     return {
