@@ -88,29 +88,42 @@ function LiveCell(cellFactory, rule, drawService) {
 }
 
 function LiveCellRule() {
-    this.isAlive = function(noNeighbours) {         
+    function isAlive(noNeighbours) {         
         return noNeighbours > 1 && noNeighbours < 4;
     }
+
+    return {
+        isAlive : isAlive
+    };
 }
 
 function DeadCellRule() {
-    this.isAlive = function(noNeighbours) {        
+    function isAlive(noNeighbours) {        
         return noNeighbours == 3;
     }
+
+    return {
+        isAlive : isAlive
+    };
 }
 
 function CellFactory(liveCellRule, deadCellRule, drawService) {
-    this.createLiveCell = function() {
+    function createLiveCell() {
         return new LiveCell(this, liveCellRule, drawService);
     }
 
-    this.createDeadCell = function() {
+    function createDeadCell() {
         return new DeadCell(this, deadCellRule, drawService);
     }
+
+    return {
+        createLiveCell : createLiveCell,
+        createDeadCell : createDeadCell
+    };
 }
 
 function NeighbourhoodWatch(gridWidth) {
-    this.getNeighbours = function(cells, cellIndex) {
+    function getNeighbours(cells, cellIndex) {
         var neighbours = new Array();
 
         var startIndex = getStartIndex(cellIndex);
@@ -125,7 +138,7 @@ function NeighbourhoodWatch(gridWidth) {
         return neighbours;
     }
 
-    var getStartIndex = function(cellIndex) {
+    function getStartIndex(cellIndex) {
         var startIndex = cellIndex - gridWidth - 1;
         
         if(startIndex < 0) {
@@ -135,7 +148,7 @@ function NeighbourhoodWatch(gridWidth) {
         return startIndex;
     }
 
-    var getEndIndex = function(cellIndex, maxIndex) {
+    function getEndIndex(cellIndex, maxIndex) {
         var endIndex = cellIndex + gridWidth + 1;         
 
         if(endIndex >= maxIndex) {
@@ -145,7 +158,7 @@ function NeighbourhoodWatch(gridWidth) {
         return endIndex;
     }
 
-    var isCellWithinBounds = function(cellIndex, currentIndex) {
+    function isCellWithinBounds(cellIndex, currentIndex) {
         var cellX = cellIndex % gridWidth;
         var cellY = Math.floor(cellIndex / gridWidth);
         var currX = currentIndex % gridWidth;   
@@ -156,4 +169,8 @@ function NeighbourhoodWatch(gridWidth) {
         
         return (x >= -1 && x <= 1) && (y >= -1 && y <= 1) && (cellIndex != currentIndex);
     }
+
+    return {
+        getNeighbours : getNeighbours
+    };
 }
