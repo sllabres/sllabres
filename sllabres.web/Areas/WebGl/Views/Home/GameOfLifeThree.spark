@@ -1,5 +1,10 @@
-﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Code.js")}"></script>
-<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Game.js")}"></script>
+﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Core.js")}"></script>
+<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/GameThree.js")}"></script>
 <script type="text/javascript" src="${Url.Content("~/Scripts/three.min.js")}"></script>
 
 <h1>Conway's Game Of Life</h1>
+
+<script>
+	var game = new Game();
+	game.update();
+</script>

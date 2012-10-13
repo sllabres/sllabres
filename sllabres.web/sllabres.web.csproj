@@ -133,7 +133,7 @@
     <Content Include="Areas\WebGl\Views\Test\Follow.spark" />
     <Content Include="Content\qunit-1.10.0.css" />
     <Content Include="Scripts\qunit-1.10.0.js" />
-    <Content Include="Scripts\threejs\three.js" />
+    <Content Include="Scripts\three.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\WebGl\Models\" />
