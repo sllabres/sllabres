@@ -1,3 +1,3 @@
-﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Code.js")}"></script>
+﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Core.js")}"></script>
 <script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Tests.js")}"></script>
 <div id="qunit"></div>

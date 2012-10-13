@@ -1,5 +1,5 @@
 ﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/glMatrix.js")}"></script><script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/webgl-utils.js")}"></script>  
-<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Code.js")}"></script>
+<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Core.js")}"></script>
 <script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/WebGl/ShaderService.js")}"></script>
 <script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/WebGl/Drawable.js")}"></script>	
 <script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/WebGl/DrawService.js")}"></script>	

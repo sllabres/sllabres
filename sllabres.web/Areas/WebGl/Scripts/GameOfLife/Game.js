@@ -1,7 +1,7 @@
 /// Disclaimer: Ashamed to say that in my haste this code was not test driven :(
 var drawable;
 var drawService;
-var gridSize = 1600;
+var gridSize = 10000;
 var gridWidth = Math.sqrt(gridSize);
 
 function init() {
@@ -15,7 +15,7 @@ function init() {
 
     drawData.x = -100.0;
     drawData.y = 0.0;
-    drawData.z = -200.0;
+    drawData.z = -320.0;
 
     drawData.vertices = [
             -1.0, -1.0,  1.0,
@@ -53,8 +53,8 @@ function tick() {
 function DrawWrapper(drawable) {
     this.draw = function(isAlive, index) {
         if(isAlive) {
-            drawable.drawData.x = (((index % gridWidth)) * 2.5) - 50;
-            drawable.drawData.y = (Math.round((index / gridWidth)) * 2.5) - 50;
+            drawable.drawData.x = (((index % gridWidth)) * 2.5) - 125;
+            drawable.drawData.y = (Math.round((index / gridWidth)) * 2.5) - 125;
             drawable.draw();        
         }
     }
@@ -68,7 +68,7 @@ function RandomSeedGenerator(drawService) {
         for(var i = 0; i<gridSize; i++) {               
             var liveCell = Math.floor((Math.random()*100)+1);   
 
-            if(liveCell > 40) {         
+            if(liveCell > 50) {         
                 cells.push(cellFactory.createLiveCell());
             }   
             else {          
