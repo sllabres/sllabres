@@ -29,7 +29,7 @@ function Game() {
         grid.draw();
         grid.update();
         renderer.render( scene, camera );
-        scene = new THREE.Scene();
+        //scene = new THREE.Scene();
     }    
 
     return {
@@ -37,15 +37,25 @@ function Game() {
     };
 
     function DrawWrapper() {
-        function draw(isAlive, index, mesh) {            
-            if(isAlive) {
-                mesh = new THREE.Mesh( geometry, material );
-                scene.add( mesh );
+        var sceneArray = new Array();
+
+        function draw(isAlive, index, mesh) {
+
+            if(sceneArray[index] == undefined){
+                sceneArray[index] = new THREE.Mesh( geometry, material );
+            }
+
+            if(isAlive) {                
+                scene.add( sceneArray[index] );
                 var x = index % gridWidth;
                 var y = Math.round(index / gridWidth);
-                mesh.position.x = (x * 10);
-                mesh.position.y = (y * 10);
+                sceneArray[index].position.x = (x * 10);
+                sceneArray[index].position.y = (y * 10);
             }
+            else {
+                scene.remove( sceneArray[index] );
+            }
+
     }
 
     return {
