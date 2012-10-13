@@ -266,29 +266,6 @@ test("Checks rule for cell", function() {
     equal(fakeCell.ruleCheck, true);
 });
 
-test("Grid update returns new cell seed", function() {
-    fakeCell = new FakeCell();
-    var testCell = new FakeCell();
-    fakeCell.returnCell = testCell;
-    var gridWidth = 1;
-    var grid = new Grid(new Array(fakeCell), new FakeNeighbourhoodWatch());
-
-    var returnSeed = grid.update();
-
-    strictEqual(returnSeed[0], testCell);
-});
-
-test("Grid update returns two cells in seed", function() {
-    fakeCell = new FakeCell();
-    var testCell = new FakeCell();
-    fakeCell.returnCell = testCell;
-
-    var gridWidth = 1;
-    var grid = new Grid(new Array(fakeCell, fakeCell), new FakeNeighbourhoodWatch());
-
-    equal(grid.update().length, 2);
-});
-
 test("Draw is called on fake cell after update", function() {      
     var fakeCell = new FakeCell();
     var grid = new Grid(new Array(fakeCell), new FakeNeighbourhoodWatch());

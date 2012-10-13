@@ -1,18 +1,19 @@
-function Grid(cells, neighbourhoodWatch) {
+function Grid(seed, neighbourhoodWatch) {
+    cells = seed;
+
     function update(){
         notifyNeighbours(cells);
-        return getReturnSeed(cells);
+        checkRules();
     }
 
-    function getReturnSeed() {
-        var returnSeed = new Array();
-        
+    function checkRules() {
+        var newCells = new Array();
         cells.forEach(function(cell, index) { 
             cell.draw(index);           
-            returnSeed.push(cell.checkRule());                        
+            newCells.push(cell.checkRule());
         });
 
-        return returnSeed;
+        cells = newCells;
     }
 
     function notifyNeighbours() {
@@ -21,10 +22,16 @@ function Grid(cells, neighbourhoodWatch) {
        });
     }
 
+    function draw() {
+        cells.forEach(function(cell, index) { 
+            cell.draw(index);
+        });
+    }
+
     return {
         update : update,
-        getReturnSeed : getReturnSeed,
-        notifyNeighbours : notifyNeighbours
+        notifyNeighbours : notifyNeighbours,
+        draw : draw
     };
 }
 

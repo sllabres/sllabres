@@ -22,31 +22,22 @@ function Game() {
     renderer.setSize( 500, 500 );
     renderer.setClearColor(new THREE.Color(0x000000))
 
-    document.body.appendChild( renderer.domElement );
-
-    function update() {
-    }
+    document.body.appendChild( renderer.domElement );    
 
     function animate() {        
-        requestAnimationFrame(animate);
-
-        grid = new Grid(cells, new NeighbourhoodWatch(gridWidth));
-        cells = grid.update();
-
+        requestAnimationFrame(animate);                
+        grid.draw();
+        grid.update();
         renderer.render( scene, camera );
         scene = new THREE.Scene();
-
-        //setTimeout(animate, 100);
-    }
-
-    animate();
+    }    
 
     return {
-        update : update
+        animate : animate
     };
 
     function DrawWrapper() {
-        function draw(isAlive, index, mesh) {
+        function draw(isAlive, index, mesh) {            
             if(isAlive) {
                 mesh = new THREE.Mesh( geometry, material );
                 scene.add( mesh );

@@ -5,6 +5,6 @@
 <h1>Conway's Game Of Life</h1>
 
 <script>
-	var game = new Game();
-	game.update();
+	var game = new Game();	
+	game.animate();
 </script>
