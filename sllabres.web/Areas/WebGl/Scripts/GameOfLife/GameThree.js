@@ -11,7 +11,7 @@ function Game() {
     
     camera.position.x = 250;
     camera.position.y = 250;
-    camera.position.z = 350;
+    camera.position.z = 400;
 
     scene = new THREE.Scene();
 
@@ -52,8 +52,8 @@ function Game() {
                 scene.add( mesh );
                 var x = index % gridWidth;
                 var y = Math.round(index / gridWidth);
-                mesh.position.x = (x * 10);
-                mesh.position.y = (y * 10);
+                mesh.position.x = (x * 11);
+                mesh.position.y = (y * 11);
             }
     }
 
