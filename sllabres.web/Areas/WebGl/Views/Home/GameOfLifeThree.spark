@@ -1,4 +1,5 @@
 ﻿<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Code.js")}"></script>
 <script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/GameOfLife/Game.js")}"></script>
+<script type="text/javascript" src="${Url.Content("~/Scripts/three.min.js")}"></script>
 
 <h1>Conway's Game Of Life</h1>
