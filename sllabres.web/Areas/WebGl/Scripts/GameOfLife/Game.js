@@ -36,11 +36,6 @@ function init() {
 
 var cells;
 
-function pause(ms) {
-    ms += new Date().getTime();
-    while (new Date() < ms){}
-} 
-
 function tick() {
 
         var grid = new Grid(cells, new NeighbourhoodWatch(gridWidth));
