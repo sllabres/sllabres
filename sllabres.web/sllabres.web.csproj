@@ -123,9 +123,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Areas\WebGl\Scripts\Jasmine\MIT.LICENSE" />
+    <None Include="Areas\WebGl\Views\Home\GameOfLifeThree.spark" />
+    <Content Include="Areas\WebGl\Scripts\GameOfLife\Core.js" />
     <Content Include="Areas\WebGl\Scripts\GameOfLife\Game.js" />
     <Content Include="Areas\WebGl\Views\Home\GameOfLife.spark" />
-    <Content Include="Areas\WebGl\Scripts\GameOfLife\Code.js" />
     <Content Include="Areas\WebGl\Scripts\GameOfLife\Tests.js" />
     <Content Include="Areas\WebGl\Views\Shared\Tests.spark" />
     <Content Include="Areas\WebGl\Views\Tests\GameOfLife.spark" />
