@@ -9,16 +9,35 @@ function Game() {
 
     camera = new THREE.PerspectiveCamera( 75, 500 / 500, 1, 10000);
     
-    camera.position.x = 250;
-    camera.position.y = 250;
-    camera.position.z = 350;
+    camera.position.x = 270;
+    camera.position.y = 270;
+    camera.position.z = 390;
 
     scene = new THREE.Scene();
 
+    var pointLight = new THREE.PointLight(0xffffff);
+
+    // set its position
+    pointLight.position.x = 250;
+    pointLight.position.y = 250;
+    pointLight.position.z = 500;
+
+    // add to the scene
+    scene.add(pointLight);
+
+    var light = new THREE.AmbientLight( 0x0000ff ); scene.add( light );
+
     geometry = new THREE.CubeGeometry( 10, 10, 10 );
+
+    var lamMat = new THREE.MeshLambertMaterial(
+    {
+      color: 0xffffff,
+    wireframe: false
+    });
+
     material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
 
-    renderer = new THREE.CanvasRenderer();    
+    renderer = new THREE.WebGLRenderer();    
     renderer.setSize( 500, 500 );
     renderer.setClearColor(new THREE.Color(0x000000))
 
@@ -41,15 +60,15 @@ function Game() {
         function draw(isAlive, index, mesh) {
 
             if(sceneArray[index] == undefined){
-                sceneArray[index] = new THREE.Mesh( geometry, material );
+                sceneArray[index] = new THREE.Mesh( geometry, lamMat );
             }
 
             if(isAlive) {                
                 scene.add( sceneArray[index] );
                 var x = index % gridWidth;
                 var y = Math.round(index / gridWidth);
-                sceneArray[index].position.x = (x * 10);
-                sceneArray[index].position.y = (y * 10);
+                sceneArray[index].position.x = (x * 11);
+                sceneArray[index].position.y = (y * 11);
             }
             else {
                 scene.remove( sceneArray[index] );
