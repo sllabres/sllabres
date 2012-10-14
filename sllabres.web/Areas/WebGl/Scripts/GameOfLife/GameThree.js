@@ -15,7 +15,7 @@ function Game() {
 
     scene = new THREE.Scene();
 
-    geometry = new THREE.CubeGeometry( 10, 10, 0 );
+    geometry = new THREE.CubeGeometry( 10, 10, 10 );
     material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
 
     renderer = new THREE.CanvasRenderer();    
