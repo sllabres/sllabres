@@ -46,10 +46,17 @@ function Game() {
 
     function animate() {                
         grid.draw();
-        grid.update();
+        //grid.update();
         renderer.render( scene, camera );
         requestAnimationFrame(animate);
     }    
+
+    function update() {
+        grid.update();
+        setTimeout(update,100);
+    }
+
+    setTimeout(update,100);
 
     return {
         animate : animate
