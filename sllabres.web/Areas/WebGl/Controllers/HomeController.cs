@@ -22,5 +22,10 @@ namespace sllabres.web.Areas.WebGl.Controllers
         {
             return View();
         }
+
+        public ActionResult Play()
+        {
+            return View();
+        }
     }
 }

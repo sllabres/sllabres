@@ -1,3 +1,5 @@
+"use strict";
+
 function Game() {
     var gridSize = 2500;
     var gridWidth = Math.sqrt(gridSize);
@@ -11,7 +13,7 @@ function Game() {
     
     camera.position.x = 270;
     camera.position.y = 270;
-    camera.position.z = 390;
+    camera.position.z = 450;
 
     scene = new THREE.Scene();
 
@@ -39,14 +41,13 @@ function Game() {
 
     renderer = new THREE.WebGLRenderer();    
     renderer.setSize( 500, 500 );
-    renderer.setClearColor(new THREE.Color(0x000000))
 
     document.body.appendChild( renderer.domElement );    
 
     function animate() {                
         grid.draw();
         grid.update();
-        renderer.render( scene, camera );                
+        renderer.render( scene, camera );
         requestAnimationFrame(animate);
     }    
 
@@ -87,7 +88,7 @@ function Game() {
 function RandomSeedGenerator(drawService) {
     this.generateSeed = function(gridSize) {
         var cellFactory = new CellFactory(new LiveCellRule(), new DeadCellRule(), drawService); 
-        cells = new Array();
+        var cells = new Array();
 
         for(var i = 0; i<gridSize; i++) {               
             var liveCell = Math.floor((Math.random()*100)+1);   
