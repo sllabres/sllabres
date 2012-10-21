@@ -1,4 +1,4 @@
-(function(three) {
+var game = (function(three) {
 function Game() {
 	var run = function() {		
 		init();
@@ -23,7 +23,7 @@ function Game() {
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 20000 );
         //camera.position.z = 1000;
 
-        camera.position.set(0,-50,2);
+        camera.position.set(0,-500,1000);
 		camera.lookAt(scene.position);
 
         var axes = new THREE.AxisHelper();
@@ -98,7 +98,8 @@ function Game() {
         requestAnimationFrame( animate );          
 
         renderer.render( scene, camera );   
-        camera.position.y += 0.01;
+        camera.position.z -= 1;
+        camera.position.y += 0.5;
 
         //controls.update();
         }
@@ -108,5 +109,5 @@ function Game() {
 	};
 }
 
-new Game().run();
+return new Game();
 })(THREE);
