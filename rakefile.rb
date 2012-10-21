@@ -9,19 +9,19 @@ msbuild :build do |msb|
 end
 
 desc "Run unit tests"
-nunit :test => :test_javascript do |nunit|
+nunit :test => :build do |nunit|
 	nunit.command = "../Library/NUnit/bin/nunit-console.exe"
 	nunit.assemblies "./sllabres.web.test/sllabres.web.test.csproj"
 	nunit.options '/xml=Sllabres.Tests-Results.xml'
 end
 
-task :git_commit_and_push => :test do	
+task :git_commit_and_push => :test_javascript do	
 	`git add .`
 	`git commit -m "Automated Commit"`
 	`git push origin master`
 end
 
-task :test_javascript => :build do
+task :test_javascript => :test do
 	Dir["sllabres.web/Scripts/tests/*.htm"].each do |file|
 		phantom_result = `phantomjs sllabres.web/Scripts/tests/run-qunit.js #{file}`
 		puts phantom_result
