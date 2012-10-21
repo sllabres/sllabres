@@ -9,7 +9,14 @@ function Game() {
     var camera, scene, renderer;
     var geometry, material;
 
-    camera = new THREE.PerspectiveCamera( 75, 500 / 500, 1, 10000);
+    var width = window.innerWidth - 50, height = window.innerHeight - 50;
+
+    renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer.setSize( width, height );                
+    renderer.shadowMapEnabled = true;
+    camera = new THREE.PerspectiveCamera( 75, width / height, 1, 20000 );
+
+    //camera = new THREE.PerspectiveCamera( 75, 500 / 500, 1, 10000);
     
     camera.position.x = 270;
     camera.position.y = 270;
@@ -39,8 +46,8 @@ function Game() {
 
     material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
 
-    renderer = new THREE.WebGLRenderer();    
-    renderer.setSize( 500, 500 );
+    //renderer = new THREE.WebGLRenderer();    
+    //renderer.setSize( 500, 500 );
 
     document.body.appendChild( renderer.domElement );    
 
