@@ -17,9 +17,9 @@ end
 
 task :git_commit_and_push => :test_javascript do
 	puts "Committing changes."
-	`git add .`	
-	`git commit -m "Automated Commit"`
-	`git push origin master`
+	puts `git add .`	
+	puts `git commit -m "Automated Commit"`
+	puts `git push origin master`
 end
 
 task :test_javascript => :test do
