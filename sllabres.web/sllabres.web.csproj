@@ -133,8 +133,9 @@
     <Content Include="Areas\WebGl\Views\Shared\Tests.spark" />
     <Content Include="Areas\WebGl\Views\Tests\GameOfLife.spark" />
     <Content Include="Areas\WebGl\Views\Test\Follow.spark" />
-    <Content Include="Content\qunit-1.10.0.css" />
-    <Content Include="Scripts\qunit-1.10.0.js" />
+    <Content Include="Scripts\tests\GameOfLife.htm" />
+    <Content Include="Scripts\tests\qunit-1.10.0.css" />
+    <Content Include="Scripts\tests\qunit-1.10.0.js" />
     <Content Include="Scripts\three.min.js" />
   </ItemGroup>
   <ItemGroup>

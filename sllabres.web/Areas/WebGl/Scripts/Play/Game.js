@@ -1,58 +1,112 @@
-(function(window, three) {
+(function(three) {
 function Game() {
-	var windowSize = 600;
-	var renderer = new three.WebGLRenderer({antialias:true}),
-		scene = new three.Scene(),
-		camera = new three.PerspectiveCamera( 75, windowSize / windowSize, 1, 20000),
-		clock = new three.Clock();
-
-    function run() {
-    	setup();
-    	update();    	
-    }
-
-    function setup() {
-    	var axes = new three.AxisHelper();
-		axes.scale.set( 1, 1, 1 );
-		scene.add( axes );
-    	renderer.setSize( windowSize, windowSize );
-    	renderer.setClearColor(new three.Color(0x000000));
-    	window.document.body.appendChild( renderer.domElement );    
-    	controls = new three.FirstPersonControls( camera );
-    			
-    	camera.position.set(0,150,1000);
-		//camera.lookAt(axes.position);	
-    	new Floor(three, scene).addFloor();
-    }
-
-    function update() {
-    	var delta = clock.getDelta();	
-    	controls.update(delta);
-    	renderer.render(scene, camera);
-    	window.requestAnimationFrame(update);
-    }
-
-    return {
-        run : run
-    };
-}
-
-function Floor(three, scene) {
-	function addFloor() {		
-		var floorTexture = new three.ImageUtils.loadTexture( '../../Content/concrete-texture.jpg' );
-		floorTexture.wrapS = floorTexture.wrapT = three.RepeatWrapping; 
-		floorTexture.repeat.set( 1, 1 );
-		var floorMaterial = new three.MeshBasicMaterial( { map: floorTexture } );
-		var floorGeometry = new three.PlaneGeometry(1000, 1000, 2, 2);
-		var floor = new three.Mesh(floorGeometry, floorMaterial);		
-		floor.doubleSided = false;
-		scene.add(floor);
+	var run = function() {		
+		init();
+    	animate();
 	}
 
+	var camera, scene, renderer;
+    var geometry, material, mesh, clock, floor, spotlight,shape;    
+
+    function init() {
+
+    	clock = new THREE.Clock();        	
+
+        scene = new THREE.Scene();
+        
+
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer.setSize( window.innerWidth, window.innerHeight );        
+        document.body.appendChild( renderer.domElement );
+        renderer.shadowMapEnabled = true;
+
+        camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 20000 );
+        //camera.position.z = 1000;
+
+        camera.position.set(0,-50,2);
+		camera.lookAt(scene.position);
+
+        var axes = new THREE.AxisHelper();
+		//axes.scale.set( 1, 1, 1 );
+		scene.add( axes );		
+
+        
+        
+        //controls = new THREE.TrackballControls( camera );
+
+        // spotlight #1 -- yellow, dark shadow
+	spotlight = new THREE.SpotLight(0xffffff);
+	spotlight.position.set(100,2000,1000);
+	//spotlight.shadowCameraVisible = true;	
+	//spotlight.shadowCameraFar = 20000;
+	spotlight.shadowDarkness =  0.95;
+	spotlight.intensity = 1;
+	// must enable shadow casting ability for the light
+	spotlight.castShadow = true;
+	scene.add(spotlight);
+
+	var light = new THREE.AmbientLight( 0x555555 ); scene.add( light );
+
+        // create "light-ball" meshes
+	var sphereGeometry = new THREE.SphereGeometry( 20, 32, 32 );
+	var darkMaterial = new THREE.MeshBasicMaterial( { color: 0x000000 } );
+		
+	var wireframeMaterial = new THREE.MeshBasicMaterial( 
+		{ color: 0xeeee00, wireframe: false, transparent: true } ); 
+	shape = THREE.SceneUtils.createMultiMaterialObject( 
+		sphereGeometry, [ darkMaterial, wireframeMaterial ] );
+	shape.position = spotlight.position;
+	scene.add( shape );
+
+	var cubeGeometry = new THREE.CubeGeometry( 50, 50, 200 );
+	var cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff } );
+	cube = new THREE.Mesh( cubeGeometry, cubeMaterial );
+	cube.position.set(100,50,100);
+	// Note that the mesh is flagged to cast shadows
+	cube.castShadow = true;
+	scene.add(cube);
+
+	floor = new Floor(THREE, scene).addFloor();
+
+
+
+    }
+
+    function Floor(three, scene) {
+		function addFloor() {		
+			var floorTexture = new THREE.ImageUtils.loadTexture( '../../Content/ConcreteTexture.png' );
+			floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
+			floorTexture.wrapS = THREE.RepeatWrapping; 
+			floorTexture.repeat.set( 50 , 50 );
+			var floorMaterial = new THREE.MeshLambertMaterial( { map: floorTexture } );
+			var floorGeometry = new THREE.PlaneGeometry(300, 300, 10, 10);
+			var floor = new THREE.Mesh(floorGeometry, floorMaterial);		
+			floor.position.y = -0.5;
+			floor.doubleSided = false;	
+			floor.receiveShadow = true;					
+			scene.add(floor);
+
+			return floor;
+		}
+
+		return {
+			addFloor : addFloor
+		};
+	}
+
+    function animate() {		    	
+        requestAnimationFrame( animate );          
+
+        renderer.render( scene, camera );   
+        camera.position.y += 0.01;
+
+        //controls.update();
+        }
+
 	return {
-		addFloor : addFloor
+		run : run
 	};
 }
 
-window.game = new Game();
-})(window, window.THREE);
+new Game().run();
+})(THREE);
