@@ -15,8 +15,8 @@ nunit :test => :build do |nunit|
 	nunit.options '/xml=Sllabres.Tests-Results.xml'
 end
 
-task :git_commit_and_push => :test_javascript do	
-	`git add .`
+task :git_commit_and_push => :test_javascript do
+	`git add .`	
 	`git commit -m "Automated Commit"`
 	`git push origin master`
 end
@@ -29,3 +29,7 @@ task :test_javascript => :test do
 	end	
 end
 
+def ask message
+	print message
+	STDIN.gets.chomp
+end
