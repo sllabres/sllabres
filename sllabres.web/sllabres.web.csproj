@@ -129,13 +129,14 @@
     <Content Include="Areas\WebGl\Views\Home\GameOfLifeThree.spark" />
     <Content Include="Areas\WebGl\Scripts\GameOfLife\Core.js" />
     <Content Include="Areas\WebGl\Scripts\GameOfLife\Game.js" />
-    <Content Include="Areas\WebGl\Scripts\GameOfLife\Tests.js" />
     <Content Include="Areas\WebGl\Views\Shared\Tests.spark" />
     <Content Include="Areas\WebGl\Views\Tests\GameOfLife.spark" />
     <Content Include="Areas\WebGl\Views\Test\Follow.spark" />
     <Content Include="Scripts\tests\GameOfLife.htm" />
+    <Content Include="Scripts\tests\GameOfLifeTests.js" />
     <Content Include="Scripts\tests\qunit-1.10.0.css" />
     <Content Include="Scripts\tests\qunit-1.10.0.js" />
+    <Content Include="Scripts\tests\run-qunit.js" />
     <Content Include="Scripts\three.min.js" />
   </ItemGroup>
   <ItemGroup>
