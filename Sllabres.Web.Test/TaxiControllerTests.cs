@@ -11,7 +11,7 @@ namespace sllabres.web.test
     public class TaxiControllerTests
     {
         [Test]
-        public void Test()
+        public void Action_Result_Is_Retured_For_Index()
         {
             var taxiController = new TaxiController();
             var view = taxiController.Index();

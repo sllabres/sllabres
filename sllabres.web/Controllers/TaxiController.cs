@@ -8,10 +8,6 @@ namespace sllabres.web.Controllers
 {
     public class TaxiController : Controller
     {
-        public TaxiController()
-        {
-        }
-
         public ActionResult Index()
         {            
             return View();
