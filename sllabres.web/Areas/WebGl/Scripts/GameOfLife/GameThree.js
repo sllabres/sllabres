@@ -7,19 +7,15 @@ function Game() {
     var grid = new Grid(new RandomSeedGenerator(new DrawWrapper()).generateSeed(gridSize), new NeighbourhoodWatch(gridWidth));
 
     var camera, scene, renderer;
-    var geometry, material, controls;
+    var geometry, material;
 
     var width = window.innerWidth - 50, height = window.innerHeight - 50;
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setSize( width, height );                
     renderer.shadowMapEnabled = true;
-    camera = new THREE.PerspectiveCamera( 75, width / height, 1, 20000 );
-    
-    controls = new THREE.TrackballControls( camera );
-
-    //camera = new THREE.PerspectiveCamera( 75, 500 / 500, 1, 10000);
-    
+    camera = new THREE.PerspectiveCamera( 75, width / height, 1, 20000 );  
+        
     camera.position.x = 270;
     camera.position.y = 270;
     camera.position.z = 450;
@@ -48,9 +44,6 @@ function Game() {
 
     material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
 
-    //renderer = new THREE.WebGLRenderer();    
-    //renderer.setSize( 500, 500 );
-
     document.body.appendChild( renderer.domElement );    
 
     function animate() {                
@@ -62,7 +55,6 @@ function Game() {
 
     function update() {
         grid.update();
-        controls.update();
         setTimeout(update,100);
     }
 
