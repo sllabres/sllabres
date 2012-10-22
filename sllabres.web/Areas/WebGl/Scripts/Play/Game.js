@@ -21,19 +21,13 @@ function Game() {
         renderer.shadowMapEnabled = true;
 
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 20000 );
-        //camera.position.z = 1000;
-
         camera.position.set(0,-500,1000);
 		camera.lookAt(scene.position);
 
-        var axes = new THREE.AxisHelper();
-		//axes.scale.set( 1, 1, 1 );
+        var axes = new THREE.AxisHelper();		
 		scene.add( axes );		
 
         
-        
-        //controls = new THREE.TrackballControls( camera );
-
         // spotlight #1 -- yellow, dark shadow
 	spotlight = new THREE.SpotLight(0xffffff);
 	spotlight.position.set(100,2000,1000);
@@ -100,8 +94,6 @@ function Game() {
         renderer.render( scene, camera );   
         camera.position.z -= 1;
         camera.position.y += 0.5;
-
-        //controls.update();
         }
 
 	return {
@@ -111,3 +103,5 @@ function Game() {
 
 return new Game();
 })(THREE);
+
+game.run();
