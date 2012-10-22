@@ -4,7 +4,7 @@ task :default => [:git_commit_and_push]
 desc "Build Solution"
 msbuild :build do |msb|
 	msb.properties :configuration => :Debug
-	msb.targets :Clean, :Build
+	msb.targets :Build
 	msb.solution = "sllabres.sln"
 end
 
