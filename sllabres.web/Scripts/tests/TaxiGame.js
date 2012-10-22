@@ -4,7 +4,8 @@
 		renderer.initiate();
 
 		var run = function() {	
-			renderer.requestAnimationFrame(run);	
+			renderer.render();
+			renderer.requestAnimationFrame(run);			
 		}
 
 		return {
@@ -18,7 +19,8 @@
 
 		var fakeRenderer = {
 				initiate : function() { },
-				requestAnimationFrame : function() { requestAnimationFrameCalled = true }
+				requestAnimationFrame : function() { requestAnimationFrameCalled = true },
+				render : function() { }
 			};
 		
 		var game = new Game(fakeRenderer);
@@ -31,7 +33,8 @@
 
 		var fakeRenderer = {
 				initiate : function() { },
-				requestAnimationFrame : function(functionToCall) { returnFunction = functionToCall }
+				requestAnimationFrame : function(functionToCall) { returnFunction = functionToCall },
+				render : function() { }
 			};
 
 		var game = new Game(fakeRenderer);
@@ -44,11 +47,26 @@
 
 		var fakeRenderer = {
 				initiate : function() { rendererInitiated = true },
-				requestAnimationFrame : function() {}
+				requestAnimationFrame : function() {},
+				render : function() { }
 			};
 
 		new Game(fakeRenderer);
 		
 		equal(rendererInitiated, true);
+	});
+
+	test("Game Calls render while running", function() {
+		var renderCalled = false;
+
+		var fakeRenderer = {
+				initiate : function() { },
+				requestAnimationFrame : function() {},
+				render : function() { renderCalled = true; }
+			};
+
+		new Game(fakeRenderer).run();
+
+		equal(renderCalled, true);
 	});
 })();
