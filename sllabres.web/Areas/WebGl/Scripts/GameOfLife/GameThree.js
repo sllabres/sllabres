@@ -7,7 +7,7 @@ function Game() {
     var grid = new Grid(new RandomSeedGenerator(new DrawWrapper()).generateSeed(gridSize), new NeighbourhoodWatch(gridWidth));
 
     var camera, scene, renderer;
-    var geometry, material;
+    var geometry, material, controls;
 
     var width = window.innerWidth - 50, height = window.innerHeight - 50;
 
@@ -15,6 +15,8 @@ function Game() {
     renderer.setSize( width, height );                
     renderer.shadowMapEnabled = true;
     camera = new THREE.PerspectiveCamera( 75, width / height, 1, 20000 );
+    
+    controls = new THREE.TrackballControls( camera );
 
     //camera = new THREE.PerspectiveCamera( 75, 500 / 500, 1, 10000);
     
@@ -60,6 +62,7 @@ function Game() {
 
     function update() {
         grid.update();
+        controls.update();
         setTimeout(update,100);
     }
 
