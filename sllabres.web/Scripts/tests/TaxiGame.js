@@ -1,12 +1,10 @@
 (function() {
-	var Game = function(requestAnimationFrame, renderer) {
+	var Game = function(renderer) {
 
-		if(renderer != undefined) {
-			renderer.initiate();
-		}
+		renderer.initiate();
 
-		var run = function() {
-			requestAnimationFrame(run);			
+		var run = function() {	
+			renderer.requestAnimationFrame(run);	
 		}
 
 		return {
@@ -16,39 +14,40 @@
 
 	module("Game Tests");
 	test("Running game calls request animation frame", function() {  
-		var requestAnimationFrameCalled = false;		
-		var requestAnimationFrame = function() {
-			requestAnimationFrameCalled = true;
-		};
+		var requestAnimationFrameCalled = false;	
+
+		var fakeRenderer = {
+				initiate : function() { },
+				requestAnimationFrame : function() { requestAnimationFrameCalled = true }
+			};
 		
-		var game = new Game(requestAnimationFrame);
+		var game = new Game(fakeRenderer);
 		game.run();
 	    equal(requestAnimationFrameCalled, true);
 	});
 
 	test("Running game calls request animation frame with run", function() {
-		var methodPassed;
-		var requestAnimationFrame = function(method) {
-			methodPassed = method;
-		};
+		var returnFunction;
 
-		var game = new Game(requestAnimationFrame);
+		var fakeRenderer = {
+				initiate : function() { },
+				requestAnimationFrame : function(functionToCall) { returnFunction = functionToCall }
+			};
+
+		var game = new Game(fakeRenderer);
 		game.run();
-		equal(methodPassed, game.run);
+		equal(returnFunction, game.run);
 	});
 
 	test("Game Initiates renderer when created", function() {
 		var rendererInitiated =  false;
 
-		var fakeRenderer = function() {
-			return {
-				initiate : function() {
-				rendererInitiated = true
-				}
+		var fakeRenderer = {
+				initiate : function() { rendererInitiated = true },
+				requestAnimationFrame : function() {}
 			};
-		};
 
-		new Game(function(){}, new fakeRenderer());
+		new Game(fakeRenderer);
 		
 		equal(rendererInitiated, true);
 	});
