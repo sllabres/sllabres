@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,11 +11,6 @@ namespace sllabres.web.Areas.WebGl.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-
-        public ActionResult GameOfLife() 
-        {
-        	return View();
         }
 
         public ActionResult GameOfLifeThree() 
