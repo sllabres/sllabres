@@ -11,7 +11,7 @@ function Game() {
 
     var width = window.innerWidth - 50, height = window.innerHeight - 50;
 
-    renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer = new THREE.CanvasRenderer( { antialias: true } );
     renderer.setSize( width, height );                
     renderer.shadowMapEnabled = true;
     camera = new THREE.PerspectiveCamera( 75, width / height, 1, 20000 );  
