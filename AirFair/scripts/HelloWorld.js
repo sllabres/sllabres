@@ -1,1 +1,0 @@
-var Student=function(){function Student(){this.fullname="Hello world!"}return Student}();
