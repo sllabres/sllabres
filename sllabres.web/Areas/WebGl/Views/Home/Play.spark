@@ -1,2 +1,0 @@
-﻿<script type="text/javascript" src="${Url.Content("~/Scripts/three.min.js")}"></script>
-<script type="text/javascript" src="${Url.Content("~/Areas/WebGl/Scripts/Play/Game.js")}"></script>

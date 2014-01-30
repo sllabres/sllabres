@@ -1,8 +1,0 @@
-﻿<NUnitProject>
-  <Settings activeconfig="Debug" processModel="Default" domainUsage="Default" />
-  <Config name="Debug" binpathtype="Auto">
-  </Config>
-  <Config name="Release" binpathtype="Auto">
-    <assembly path="sllabres.web.test\bin\Release\sllabres.web.test.dll" />
-  </Config>
-</NUnitProject>
