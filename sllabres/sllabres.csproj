@@ -57,8 +57,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Boids\Boids.html" />
-    <Content Include="Boids\BoidsTests.html" />
+    <Content Include="Boids\index.html" />
+    <Content Include="Boids\tests.html" />
     <Content Include="Content\qunit.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -115,11 +115,11 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="GameOfLife\GameOfLife.html" />
-    <Content Include="GameOfLife\GameOfLifeTests.html" />
     <Content Include="Boids\Tests.js" />
     <Content Include="GameOfLife\GameOfLife.js" />
     <Content Include="GameOfLife\GameThree.js" />
+    <Content Include="GameOfLife\index.html" />
+    <Content Include="GameOfLife\tests.html" />
     <Content Include="GameOfLife\Tests.js" />
     <None Include="Scripts\jquery\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery\jquery-1.8.2.js" />
