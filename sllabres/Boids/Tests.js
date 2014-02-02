@@ -26,8 +26,8 @@ function Boid(world, yaw) {
 
         yaw = alignmentRule.yaw(totalYaw, neighbourCount);
         world.notify(yaw, location);
-        neighbourCount = 0;
-        totalYaw = 0;
+
+        return new Boid(world, yaw);        
     }
 
     return {
@@ -57,9 +57,12 @@ function World(renderer) {
     }
 
     function update() {
+        var notifiedBoids = new Array();
         boids.forEach(function (boid, index) {
-            boid.notifyNeighbours(boids);
+            notifiedBoids.push(boid.notifyNeighbours(boids));
         });
+
+        boids = notifiedBoids;
     }
 
     return {
