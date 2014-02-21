@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Boids</title>
+    <script type="text/javascript" src="EventBus.js"></script>
+    <script type="text/javascript" src="Boids.js"></script>
     <script type="text/javascript" src="../Scripts/three.min.js"></script>
     <script type="text/javascript" src="../Scripts/jquery/jquery-1.8.2.min.js"></script>
     <style>
@@ -13,38 +15,52 @@
 </head>
 <body>    
     <script>
+        var eventBus = Boids.EventBus.getInstance();        
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        var renderer = new THREE.WebGLRenderer();
+        var renderer = new THREE.WebGLRenderer();        
+        var world = new World(eventBus);
+        var boidA = new Boid(world, 0);
+        var boidB = new Boid(world, 1);
+        world.addBoid(boidA);
+        world.addBoid(boidB);
         renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+        document.body.appendChild(renderer.domElement);        
 
         var geometry = new THREE.Geometry();
-        var v1 = new THREE.Vector3(50, 0, 0);   // Vector3 used to specify position
-        var v2 = new THREE.Vector3(-50, 0, 0);
-        var v3 = new THREE.Vector3(0, 100, 0);
+        var v1 = new THREE.Vector3(30, -25, 0);   // Vector3 used to specify position
+        var v2 = new THREE.Vector3(-30, -25, 0);
+        var v3 = new THREE.Vector3(0, 25, 0);
         geometry.vertices.push(v1);
         geometry.vertices.push(v2);
         geometry.vertices.push(v3);
         geometry.faces.push(new THREE.Face3(0, 2, 1));
         var redMat = new THREE.MeshBasicMaterial({ color: 0xff0000 });
         redMat.side = THREE.DoubleSide;
-        var triangle = new THREE.Mesh(geometry, redMat);
-        scene.add(triangle);
+        var triangleA = new THREE.Mesh(geometry, redMat);
+        scene.add(triangleA);
+        var triangleB = new THREE.Mesh(geometry, redMat);
+        triangleB.position.x += 100;
+        scene.add(triangleB);
 
-        //var geometry = new THREE.CubeGeometry(1, 1, 1);
-        //var material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
-        //var cube = new THREE.Mesh(geometry, material);
-        //scene.add(cube);
+        var boidAssets = new Array();
+        var currentBoid = 0;
+        boidAssets.push(triangleA, triangleB);
 
         camera.position.z = 500;
 
-        var render = function () {
-            requestAnimationFrame(render);
+        var updateBoids = function (yaw) {
+            boidAssets[currentBoid].rotation.z = yaw;
+            currentBoid++;
+            currentBoid = currentBoid > 1 ? 0 : currentBoid;
+        }
 
-            triangle.rotation.z += 0.01;
+        eventBus.subscribe(Boids.EventType.DrawBoid, updateBoids);
 
+        var render = function () {            
+            requestAnimationFrame(render);            
             renderer.render(scene, camera);
+            world.update();
         };
 
         render();

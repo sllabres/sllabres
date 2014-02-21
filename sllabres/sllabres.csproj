@@ -57,6 +57,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Boids\Boids.js" />
+    <Content Include="Boids\EventBus.js" />
     <Content Include="Boids\index.html" />
     <Content Include="Boids\tests.html" />
     <Content Include="Content\qunit.css" />
