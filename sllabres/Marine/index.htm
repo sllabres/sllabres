@@ -1,0 +1,173 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+   <title>Babylon - Basic scene</title>
+
+   <style>
+      html, body {
+         overflow: hidden;
+         width: 100%;
+         height: 100%;
+         margin: 0;
+         padding: 0;
+      }
+
+      #renderCanvas {
+         width: 100%;
+         height: 100%;
+         touch-action: none;
+      }
+   </style>
+
+   <script src="babylon.1.14-debug.js"></script>
+   <script src="cannon.js"></script>  <!-- optional physics engine -->
+</head>
+
+<body>
+   <canvas id="renderCanvas"></canvas>
+
+   <script type="text/javascript">
+
+      // Get the canvas element from our HTML below
+      var canvas = document.getElementById("renderCanvas");
+
+      // Load the BABYLON 3D engine
+      var engine = new BABYLON.Engine(canvas, true);
+
+      // -------------------------------------------------------------
+      // Here begins a function that we will 'call' just after it's built
+      var createScene = function () {       
+         // Now create a basic Babylon Scene object
+         var scene = new BABYLON.Scene(engine);
+
+         // Change the scene background color to green.
+         scene.clearColor = new BABYLON.Color3(0, 0, 0);
+
+         // This creates and positions a free camera
+         var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 0, -20), scene);
+
+         //// This targets the camera to scene origin
+         camera.setTarget(BABYLON.Vector3.Zero());
+         
+
+         //// This attaches the camera to the canvas
+          //camera.attachControl(canvas, false);
+
+         //var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0.8, 90, BABYLON.Vector3.Zero(), scene);
+         ////camera.lowerBetaLimit = 0.1;
+         ////camera.upperBetaLimit = (Math.PI / 2) * 0.9;
+         ////camera.lowerRadiusLimit = 30;
+         ////camera.upperRadiusLimit = 150;
+         //camera.attachControl(canvas, true);
+
+
+         // This creates a light, aiming 0,1,0 - to the sky.
+         //var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
+
+         //// Dim the light a small amount
+         //light.intensity = 0.9;
+
+         //var ground = BABYLON.Mesh.CreateGround("ground1", 6, 6, 2, scene);
+
+ 	 //Creation of a plane
+         var plane = BABYLON.Mesh.CreatePlane("plane", "1", scene);
+         
+ 	//plane.position.y = -5;
+	//plane.rotation.x = Math.PI / 2;
+
+    //Creation of a repeated textured material
+	var materialPlane = new BABYLON.StandardMaterial("texturePlane", scene);	
+	materialPlane.diffuseTexture = new BABYLON.Texture("marine1.png", scene);
+	materialPlane.diffuseTexture.uScale = 1.0;//Repeat 5 times on the Vertical Axes
+	materialPlane.diffuseTexture.vScale = 1.0;//Repeat 5 times on the Horizontal Axes
+	materialPlane.diffuseTexture.hasAlpha = true;
+	materialPlane.backFaceCulling = false;//Al  lways show the front and the back of an element
+	materialPlane.specularColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+	materialPlane.bumpTexture = new BABYLON.Texture("marine1normal.png", scene);
+	materialPlane.bumpTexture.uScale = 1.0;
+	materialPlane.bumpTexture.vScale = 1.0;
+	materialPlane.bumpTexture.hasAlpha = true;
+          plane.material = materialPlane;
+
+	//var light0 = new BABYLON.SpotLight("Spot0", new BABYLON.Vector3(5, 10, 0), new BABYLON.Vector3(0, -1, 0), 0.8, 2, scene);
+	//light0.diffuse = new BABYLON.Color3(1, 0, 0);
+	//light0.specular = new BABYLON.Color3(1, 1, 1);
+    //    light0.intensity = 1;	
+
+	// 
+
+	var light1 = new BABYLON.SpotLight("Spot0", new BABYLON.Vector3(0, 0, -100), new BABYLON.Vector3(0, 0, 1), 0.9, 5, scene);
+	light1.diffuse = new BABYLON.Color3(1, 1, 1);
+	light1.specular = new BABYLON.Color3(1, 1, 1);
+	light1.intensity = 0.01;
+
+	var light0 = new BABYLON.HemisphericLight("Hemi0", new BABYLON.Vector3(0, 1, 0), scene);
+	light0.diffuse = new BABYLON.Color3(1, 1, 1);
+	light0.specular = new BABYLON.Color3(1, 1, 1);
+	light0.groundColor = new BABYLON.Color3(0, 0, 0);
+	light0.intensity = 0.1
+
+	scene.registerBeforeRender(function () {
+
+	    document.onmousemove = handleMouseMove;
+	    function handleMouseMove(event) {
+	        var pickResult = scene.pick(event.clientX, event.clientY);
+	        
+	        if (pickResult.hit) {
+	            //plane.lookAt(new BABYLON.Vector3(pickResult.pickedPoint.x, pickResult.pickedPoint.y, 1))
+	            plane.position.x = pickResult.pickedPoint.x;
+	            plane.position.y = pickResult.pickedPoint.y;
+	        }
+	            //console.log(pickResult.pickedPoint.x);
+	        //console.log(plane.position.x);
+	        
+	        //plane.lookAt(new BABYLON.Vector3(0, event.x, 0));
+	        //event.x
+	    }
+
+	    //materialPlane.rotation.x += 0.01;
+	    //materialPlane.rotation.z += 0.02;
+
+	    //function onKeyDown(evt) {	        
+	    //    switch (evt.keyCode) {
+	    //        case 65: //'A'
+	    //            plane.position.x += 0.0002;
+	    //            break;
+	    //        case 90: //'Z'
+	    //            plane.position.x -= 0.0002;
+	    //            break;
+	    //        case 69: //'E'
+	    //            currentEnding = 2;
+	    //            break;
+	    //    }
+	    //}
+
+	    //    window.addEventListener("keydown", onKeyDown);            
+	    
+
+	});
+
+
+         // Leave this function
+         return scene;
+
+      };  // End of createScene function
+      // -------------------------------------------------------------
+
+      // Now, call the createScene function that you just finished creating
+      var scene = createScene();
+
+      // Register a render loop to repeatedly render the scene
+      engine.runRenderLoop(function () {
+         scene.render();
+      });
+
+      // Watch for browser/canvas resize events
+      window.addEventListener("resize", function () {
+         engine.resize();
+      });
+
+   </script>
+
+</body>
+</html>
