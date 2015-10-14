@@ -123,6 +123,9 @@
     <Content Include="GameOfLife\index.html" />
     <Content Include="GameOfLife\tests.html" />
     <Content Include="GameOfLife\Tests.js" />
+    <Content Include="ITGuys\v1.htm" />
+    <Content Include="ITGuys\v2.htm" />
+    <Content Include="ITGuys\v3.htm" />
     <Content Include="Marine\babylon.1.14-debug.js" />
     <Content Include="Marine\babylon.1.14.d.ts" />
     <Content Include="Marine\babylon.1.14.js" />
