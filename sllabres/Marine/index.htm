@@ -108,6 +108,7 @@
 
 	// 
 
+<<<<<<< HEAD
 	      //  var light1 = new BABYLON.SpotLight("Spot0", new BABYLON.Vector3(0, 0, -20), new BABYLON.Vector3(0, 0, 1), 0.1, 2, scene);
 	      //  light1.diffuse = new BABYLON.Color3(1, 1, 1);
 	      //  light1.specular = new BABYLON.Color3(1, 1, 1);	
@@ -146,6 +147,20 @@
 	//light0.intensity = 0.3;
 
 	var ground = BABYLON.Mesh.CreateGround("ground1", 50, 50, 2, scene);
+=======
+	var light1 = new BABYLON.SpotLight("Spot0", new BABYLON.Vector3(0, 0, -20), new BABYLON.Vector3(0, 0, 1), 0.1, 2, scene);
+	light1.diffuse = new BABYLON.Color3(1, 1, 1);
+	light1.specular = new BABYLON.Color3(1, 1, 1);
+	light1.intensity = 0.1;
+
+	var light0 = new BABYLON.HemisphericLight("Hemi0", new BABYLON.Vector3(0, 1, 0), scene);
+	light0.diffuse = new BABYLON.Color3(1, 1, 1);
+	light0.specular = new BABYLON.Color3(1, 1, 1);
+	light0.groundColor = new BABYLON.Color3(0, 0, 0);
+	light0.intensity = 0.1;
+
+	var ground = BABYLON.Mesh.CreateGround("ground1", 60, 60, 2, scene);
+>>>>>>> b2766ab1eb216ff5c5f262018812ddd27142ee56
 	ground.rotation.x = 3 * Math.PI / 2;
 	ground.receiveShadows = true;
 
