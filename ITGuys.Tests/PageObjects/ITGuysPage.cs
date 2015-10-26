@@ -27,10 +27,12 @@ namespace ITGuys.Tests.PageObjects
 
         public IEnumerable<ImportantPeopleData> GetImportantPeople()
         {
-            //var personRow = _session.FindXPath("//tr[td='Tommy']");            
+            var personRow = _session.FindXPath("//tr[td='Tommy']");            
 
             return _session.FindAllCss("body > table > tbody > tr").Select(r =>
                 {   
+                    //_session.ExecuteScript(string.Format("document.evaluate({0}, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).innerHTML = '<h2>Hello</h2>';", "//tr[td='Tommy']"));
+
                     var columns = r.FindAllCss("td");
                     return new ImportantPeopleData
                     {
