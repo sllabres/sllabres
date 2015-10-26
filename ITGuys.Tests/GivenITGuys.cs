@@ -41,11 +41,10 @@ namespace ITGuys.Tests
             desiredCapabilites.SetCapability("platform", "Windows 7");
             desiredCapabilites.SetCapability("username", "sebllabres");
             desiredCapabilites.SetCapability("accessKey", "892fdc2f-7409-4979-a592-e5e3d3ee73bc");
-            desiredCapabilites.SetCapability("name", TestContext.CurrentContext.Test.Name);            
-            _driver = new SauceLabsDriver(Browser.Parse("chrome"), desiredCapabilites, new CustomRemoteDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), desiredCapabilites));
-            _browserSession = new BrowserSession(configuration, _driver);            
-            
-            _browserSession.MaximiseWindow();            
+            desiredCapabilites.SetCapability("name", TestContext.CurrentContext.Test.Name);
+            _driver = new SauceLabsDriver(Browser.Parse(ConfigurationSettings.AppSettings["browser"]), desiredCapabilites, new CustomRemoteDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), desiredCapabilites));
+            _browserSession = new BrowserSession(configuration, _driver);
+            _browserSession.MaximiseWindow();
         }
 
         [TearDown]
@@ -70,18 +69,20 @@ namespace ITGuys.Tests
         {
             _browserSession.Visit(ConfigurationSettings.AppSettings["AppHost"] + "/ITGuys/v3.htm");
             var iTGuysPage = new ITGuysPage(_browserSession);
+            var importantPeopleStore = new ImportantPeopleStore(iTGuysPage.GetImportantPeople());
 
             Assert.That(iTGuysPage.GetHeading(), Is.EqualTo("Important People in IT"));
             Assert.That(iTGuysPage.GetSubHeading(), Is.EqualTo("Version 3"));
-            //Assert.That(iTGuysPage.GetDateOfBirthBy("Tommy", "Flowers"), Is.EqualTo("22/12/1905"));
-            //Assert.That(iTGuysPage.GetDateOfBirthBy("Bob", "Kahn"), Is.EqualTo("23/12/1938"));
-            //Assert.That(iTGuysPage.GetDateOfBirthBy("Larry", "Ellison"), Is.EqualTo("17/08/1944"));
-            //Assert.That(iTGuysPage.GetDateOfBirthBy("Scott", "McNealy"), Is.EqualTo("13/11/1954"));
-            //Assert.That(iTGuysPage.GetDateOfBirthBy("Steve", "Jobs"), Is.EqualTo("24/02/1955"));
-            //Assert.That(iTGuysPage.GetDateOfBirthBy("Tim", "Berners-Lee"), Is.EqualTo("08/06/1955"));
-            //Assert.That(iTGuysPage.GetDateOfBirthBy("Bill", "Gates"), Is.EqualTo("28/10/1955"));
+            Assert.That(importantPeopleStore.GetImportantPerson("Tommy", "Flowers").DateOfBirth, Is.EqualTo("22/12/1905"));
+            Assert.That(importantPeopleStore.GetImportantPerson("Bob", "Kahn").DateOfBirth, Is.EqualTo("23/12/1938"));
+            Assert.That(importantPeopleStore.GetImportantPerson("Larry", "Ellison").DateOfBirth, Is.EqualTo("17/08/1944"));
+            Assert.That(importantPeopleStore.GetImportantPerson("Scott", "McNealy").DateOfBirth, Is.EqualTo("13/11/1954"));
+            Assert.That(importantPeopleStore.GetImportantPerson("Steve", "Jobs").DateOfBirth, Is.EqualTo("24/02/1955"));
+            Assert.That(importantPeopleStore.GetImportantPerson("Tim", "Berners-Lee").DateOfBirth, Is.EqualTo("08/06/1955"));
+            Assert.That(importantPeopleStore.GetImportantPerson("Bill", "Gates").DateOfBirth, Is.EqualTo("28/10/1955"));
+            
         }
-    }
+    }    
 
     public class SauceLabsDriver : SeleniumWebDriver
     {

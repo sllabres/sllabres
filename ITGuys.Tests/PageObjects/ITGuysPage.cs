@@ -25,27 +25,46 @@ namespace ITGuys.Tests.PageObjects
             return _session.FindCss("h2").InnerHTML;
         }
 
-        public string GetDateOfBirthBy(string firstname, string surname)
+        public IEnumerable<ImportantPeopleData> GetImportantPeople()
         {
-            var rows = _session.FindAllCss("tr").Select(r => 
-                {
+            //var personRow = _session.FindXPath("//tr[td='Tommy']");            
+
+            return _session.FindAllCss("body > table > tbody > tr").Select(r =>
+                {   
                     var columns = r.FindAllCss("td");
                     return new ImportantPeopleData
                     {
                         Firstname = columns.Select(c => c.InnerHTML).ToArray()[0],
                         Surname = columns.Select(c => c.InnerHTML).ToArray()[1],
                         DateOfBirth = columns.Select(c => c.InnerHTML).ToArray()[2]
-                    };                    
-                });
+                    };
+                }).ToList();            
+        }        
+    }
 
-            return rows.First(r => r.Firstname == firstname && r.Surname == surname).DateOfBirth;
+    public class ImportantPeopleData
+    {
+        public string Firstname { get; set; }
+        public string Surname { get; set; }
+        public string DateOfBirth { get; set; }
+    }
+
+    public class NullImportantPeopleData : ImportantPeopleData
+    {
+    }
+
+    public class ImportantPeopleStore
+    {
+        private IEnumerable<ImportantPeopleData> _importantPeople;
+
+        public ImportantPeopleStore(IEnumerable<ImportantPeopleData> importantPeople)
+        {
+            _importantPeople = importantPeople;
         }
 
-        internal class ImportantPeopleData
+        public ImportantPeopleData GetImportantPerson(string firstName, string surname)
         {
-            public string Firstname { get; set; }
-            public string Surname { get; set; }
-            public string DateOfBirth { get; set; }
+            return _importantPeople.FirstOrDefault(x => x.Firstname == firstName && x.Surname == surname) ?? new NullImportantPeopleData();
         }
     }
 }
