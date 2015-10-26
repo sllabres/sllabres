@@ -29,11 +29,12 @@ namespace ITGuys.Tests.PageObjects
         {
             var rows = _session.FindAllCss("tr").Select(r => 
                 {
+                    var columns = r.FindAllCss("td");
                     return new ImportantPeopleData
-                    {                        
-                        Firstname = r.FindAllCss("td").Select(c => c.InnerHTML).ToArray()[0],
-                        Surname = r.FindAllCss("td").Select(c => c.InnerHTML).ToArray()[1],
-                        DateOfBirth = r.FindAllCss("td").Select(c => c.InnerHTML).ToArray()[2]
+                    {
+                        Firstname = columns.Select(c => c.InnerHTML).ToArray()[0],
+                        Surname = columns.Select(c => c.InnerHTML).ToArray()[1],
+                        DateOfBirth = columns.Select(c => c.InnerHTML).ToArray()[2]
                     };                    
                 });
 
