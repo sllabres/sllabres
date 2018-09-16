@@ -210,7 +210,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sheartest.zip" />
     <Content Include="SHEAR.Application.application" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
