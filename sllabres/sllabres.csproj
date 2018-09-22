@@ -151,44 +151,43 @@
     <Content Include="Marine\Construct\jquery-2.0.0.min.js" />
     <Content Include="Marine\Construct\loading-logo.png" />
     <Content Include="Marine\Construct\offline.appcache" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Fonts\Start.xnb.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Levels\0.txt.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Levels\1.txt.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Logo\A.png.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Logo\A.xnb.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Logo\E.png.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Logo\E.xnb.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Logo\H.png.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Logo\H.xnb.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Logo\R.png.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Logo\R.xnb.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Logo\S.png.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Logo\S.xnb.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Logo\stop.png.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Logo\stop.xnb.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Music\Music01.mp3.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Music\Music01.wma.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Music\Music01.xnb.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Tiles\Floor01.png.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Tiles\Floor01.xnb.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Tiles\Wall01.png.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Content\Tiles\Wall01.xnb.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\FarseerPhysics MonoGame.dll.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\Icon.ico.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\MonoGame.Framework.dll.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\MonoGame.Penumbra.dll.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\RogueSharp.dll.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\SharpDX.Direct2D1.dll.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\SharpDX.Direct3D11.dll.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\SharpDX.Direct3D9.dll.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\SharpDX.dll.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\SharpDX.DXGI.dll.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\SharpDX.MediaFoundation.dll.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\SharpDX.XAudio2.dll.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\SharpDX.XInput.dll.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\SHEAR.Application.application" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\SHEAR.Application.exe.deploy" />
-    <Content Include="Application Files\SHEAR.Application_1_0_0_20\SHEAR.Application.exe.manifest" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Fonts\Start.xnb.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Levels\1.txt.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Logo\A.png.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Logo\A.xnb.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Logo\E.png.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Logo\E.xnb.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Logo\H.png.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Logo\H.xnb.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Logo\R.png.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Logo\R.xnb.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Logo\S.png.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Logo\S.xnb.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Logo\stop.png.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Logo\stop.xnb.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Music\Music01.mp3.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Music\Music01.wma.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Music\Music01.xnb.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Tiles\Floor01.png.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Tiles\Floor01.xnb.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Tiles\Wall01.png.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Content\Tiles\Wall01.xnb.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\FarseerPhysics MonoGame.dll.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\Icon.ico.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\MonoGame.Framework.dll.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\MonoGame.Penumbra.dll.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\RogueSharp.dll.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\SharpDX.Direct2D1.dll.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\SharpDX.Direct3D11.dll.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\SharpDX.Direct3D9.dll.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\SharpDX.dll.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\SharpDX.DXGI.dll.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\SharpDX.MediaFoundation.dll.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\SharpDX.XAudio2.dll.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\SharpDX.XInput.dll.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\SHEAR.Application.application" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\SHEAR.Application.exe.deploy" />
+    <Content Include="Application Files\SHEAR.Application_1_0_0_25\SHEAR.Application.exe.manifest" />
     <None Include="Scripts\jquery\jquery-1.8.2.intellisense.js" />
     <Content Include="Marine\index.htm" />
     <Content Include="Marine\marine1.png" />
@@ -225,6 +224,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
